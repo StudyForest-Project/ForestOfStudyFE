@@ -1,0 +1,18 @@
+.button {
+  width: 252px;
+  height: 58px;
+  padding: 10px;
+  border: none;
+  border-radius: 14px;
+  background: #99c08e;
+  cursor: pointer;
+}
+
+.text {
+  color: #ffffff;
+  text-align: center;
+  font-family: EF_jejudoldam;
+  font-size: 18px;
+  font-weight: 400;
+  text-shadow: 0 -2px 0 #578246;
+}

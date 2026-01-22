@@ -1,0 +1,28 @@
+.page {
+  min-height: 100vh;
+  padding: 60px 20px;
+  background: var(--bg-bg_F6F4EF, #f6f4ef);
+}
+
+.topBar {
+  margin: 0 auto;
+  max-width: 1480px;
+  padding: 20px 0;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  width: 182px;
+  height: auto;
+}
+
+.container {
+  max-width: 1248px;
+  margin: 100px auto 0;
+  padding: 40px;
+  border-radius: 20px;
+  background: #ffffff;
+}

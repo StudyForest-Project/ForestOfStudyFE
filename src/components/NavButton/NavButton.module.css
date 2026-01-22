@@ -1,0 +1,16 @@
+.button {
+  border: 1px solid var(--gray-gray_DDDDDD, #ddd);
+  border-radius: 15px;
+  background: #fff;
+  padding: 12px 24px;
+  cursor: pointer;
+
+  color: var(--gray-gray_818181, #818181);
+  font-size: 16px;
+  text-decoration: none;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}

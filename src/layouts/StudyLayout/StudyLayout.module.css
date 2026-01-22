@@ -1,0 +1,22 @@
+.page {
+  min-height: 100vh;
+  padding: 60px 20px;
+  background: var(--bg-bg_F6F4EF, #f6f4ef);
+}
+
+.logo {
+  width: 182px;
+  height: auto;
+
+  position: absolute;
+  top: 20px;
+  left: 220px;
+}
+
+.container {
+  max-width: 1248px;
+  margin: 100px auto 0;
+  padding: 40px;
+  border-radius: 20px;
+  background: #ffffff;
+}
