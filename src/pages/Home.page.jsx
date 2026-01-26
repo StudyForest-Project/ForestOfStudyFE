@@ -1,9 +1,9 @@
-import { Link } from "react-router";
+import { Link } from 'react-router';
 export const HomePage = () => {
   return (
     <>
       <h1>홈 페이지</h1>
-      <Link to='/study/1'>상세페이지</Link>
+      <Link to="/study/1">상세페이지</Link>
     </>
   );
 };
