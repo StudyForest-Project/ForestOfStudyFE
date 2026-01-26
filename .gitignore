@@ -14,7 +14,8 @@ dist-ssr
 
 # 환경 변수 (민감 정보)
 .env
-.env.*.local
+.env.*
+!.env.example
 
 # Editor directories and files
 .vscode/*
