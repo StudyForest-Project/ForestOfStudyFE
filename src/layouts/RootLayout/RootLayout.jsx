@@ -3,6 +3,8 @@ import { Outlet } from 'react-router';
 import styles from './RootLayout.module.css';
 import logo from '../../assets/logo.png';
 import { PrimaryButton } from '../../components/PrimaryButton';
+import { RecentStudy } from '../../components/Study/RecentStudy';
+import { BrowseStudy } from '../../components/Study/BrowseStudy';
 
 export const RootLayout = () => {
   return (
@@ -13,9 +15,18 @@ export const RootLayout = () => {
           <PrimaryButton>스터디 만들기</PrimaryButton>
         </Link>
       </header>
-      <main className={styles.container}>
-        <Outlet />
-      </main>
+      <div>
+        <main className={styles.container}>
+          <Outlet />
+          <RecentStudy />
+        </main>
+      </div>
+      <div>
+        <main className={styles.container}>
+          <Outlet />
+          <BrowseStudy />
+        </main>
+      </div>
     </div>
   );
 };
