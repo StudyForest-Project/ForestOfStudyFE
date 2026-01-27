@@ -1,0 +1,22 @@
+.section {
+  max-width: 1200px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.title {
+  margin: 0;
+  color: #414141;
+  font-family: Pretendard;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+}
+
+.grid {
+  display: flex;
+  gap: 24px;
+}

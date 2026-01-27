@@ -5,7 +5,7 @@ export const study = {
       title: '연우의 개발공장',
       nickname: 'MK',
       description: '쌓이면 된다',
-      backgroundImage: '#FFE4E1',
+      backgroundImage: '#E1EDDE',
       totalPoint: 99,
       emojis: [
         { emoji: '🔥', count: 12 },
@@ -16,10 +16,12 @@ export const study = {
     },
     {
       id: '2X7R5JQC42EJ5E6RHXQAQPDH4A',
-      title: '알고리즘 루틴',
+      title:
+        '알고리즘 루틴알고리즘 루틴알고리즘 루틴알고리즘 루틴알고리즘 루틴',
       nickname: 'AR',
-      description: '매일 기록',
-      backgroundImage: '#F5F5F5',
+      description:
+        '매일 기록알고리즘 루틴알고리즘 루틴알고리즘 루틴알고리즘 루틴알고리즘 루틴알고리즘 루틴알고리즘 루틴알고리즘 루틴알고리즘 루틴알고리즘 루틴',
+      backgroundImage: '#FFF1CC',
       totalPoint: 388,
       emojis: [
         { emoji: '💪', count: 15 },
@@ -33,7 +35,8 @@ export const study = {
       title: '리액트 매일',
       nickname: 'HN',
       description: '루틴 만들기',
-      backgroundImage: 'https://cdn.example.com/bg/bg1.png',
+      backgroundImage:
+        'https://images.unsplash.com/photo-1650661926447-9efb2610f64c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c3R1ZHklMjB0YWJsZXxlbnwwfHwwfHx8MA%3D%3D',
       totalPoint: 432,
       emojis: [
         { emoji: '✨', count: 20 },
@@ -60,7 +63,8 @@ export const study = {
       title: 'CS 기초',
       nickname: '040128',
       description: '오늘도 한 줄',
-      backgroundImage: 'https://cdn.example.com/bg/bg3.png',
+      backgroundImage:
+        'https://plus.unsplash.com/premium_photo-1685287731073-3e3c4c565132?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8c3R1ZHklMjB0YWJsZXxlbnwwfHwwfHx8MA%3D%3D',
       totalPoint: 285,
       emojis: [
         { emoji: '🎯', count: 18 },
