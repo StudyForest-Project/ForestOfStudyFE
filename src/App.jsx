@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router';
 import { StudyLayout } from './layouts/StudyLayout';
 import { RootLayout } from './layouts/RootLayout';
 import {
