@@ -1,6 +1,6 @@
 const KEY = 'isLoggedIn';
 
-// 앱 시작시
+// 시작
 export const authStorage = {
   isLoggedIn() {
     return localStorage.getItem(KEY) === 'true';
