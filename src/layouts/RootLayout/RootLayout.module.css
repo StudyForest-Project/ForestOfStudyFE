@@ -1,6 +1,6 @@
 .page {
   min-height: 100vh;
-  padding: 60px auto;
+  /* padding: 60px auto; */
   background: var(--bg-bg_F6F4EF, #f6f4ef);
 }
 
