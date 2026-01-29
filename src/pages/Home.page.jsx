@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
-import { StudyCard } from '../components/Study/StudyCard';
+import { RecentPage } from '../components/Study/sections/Recent.page';
+import { BrowseStudiesPage } from '../components/Study/sections/BrowseStudies.page';
 
 export const HomePage = () => {
   return (
     <>
-      <h1>홈 페이지</h1>
-      <StudyCard />
-      <Link to="/study/1">상세페이지</Link>
+      <RecentPage />
+      <BrowseStudiesPage />
     </>
   );
 };
