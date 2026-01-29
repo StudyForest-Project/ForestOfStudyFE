@@ -4,13 +4,15 @@ import {
 } from '../../../assets/icons/habitCheckIcons';
 import styles from './HabitTable.module.css';
 
+const DAYS = ['월', '화', '수', '목', '금', '토', '일'];
+
 export const HabitTable = ({ habitWeek }) => {
-  const { columns, rows } = habitWeek;
+  const { rows } = habitWeek;
 
   return (
     <>
       <div className={styles.row}>
-        {columns.map((day, index) => (
+        {DAYS.map((day, index) => (
           <span
             key={day}
             className={styles.day}
@@ -33,10 +35,7 @@ export const HabitTable = ({ habitWeek }) => {
 
               return (
                 <div key={checkIndex}>
-                  <img
-                    src={iconSrc}
-                    alt={checked ? '완료' : '미완료'}
-                  />
+                  <img src={iconSrc} alt={checked ? '완료' : '미완료'} />
                 </div>
               );
             })}

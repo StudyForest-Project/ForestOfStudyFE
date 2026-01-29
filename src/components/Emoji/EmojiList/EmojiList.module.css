@@ -1,0 +1,23 @@
+.wrapper {
+  position: relative;
+}
+
+.emojiContainer {
+  display: flex;
+  gap: 4px;
+}
+
+.moreButton {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.dropDown {
+  border-radius: 15px;
+  border: 1px solid var(--gray-gray_DDDDDD, #ddd);
+  background: #fff;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.08);
+  padding: 12px;
+
+  position: absolute;
+  gap: 10px;
+}
