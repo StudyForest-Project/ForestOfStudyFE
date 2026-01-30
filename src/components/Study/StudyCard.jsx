@@ -1,5 +1,5 @@
 import styles from './StudyCard.module.css';
-import ic_point from '../../assets/icons/ic_point.svg';
+import ic_point from '@/assets/icons/ic_point.svg';
 
 export function StudyCard({ item }) {
   const bgValue = item?.backgroundImage || '';
