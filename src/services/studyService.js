@@ -7,7 +7,7 @@ const getStudyDetail = async (studyId) => {
 };
 
 // POST /studies/:studyId/emojis
-const addEmoji = async (studyId, emojis) => {
+const addEmojis = async (studyId, emojis) => {
   const res = await api.post(`/studies/${studyId}/emojis`, { emojis });
   return res.data;
 };
@@ -18,4 +18,4 @@ const getEmojies = async (studyId) => {
   return res.data;
 };
 
-export { getStudyDetail, addEmoji, getEmojies };
+export { getStudyDetail, addEmojis, getEmojies };

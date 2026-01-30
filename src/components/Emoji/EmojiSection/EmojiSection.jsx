@@ -15,13 +15,13 @@ export const EmojiSection = ({ studyId, initialEmojis }) => {
     setEmojis((prev) => {
       const found = prev.find((e) => e.emoji === emoji);
 
-      if (found) {
-        return prev.map((e) =>
-          e.emoji === emoji ? { ...e, count: e.count + 1 } : e,
-        );
+      if (!found) {
+        return [{ emoji, count: 1 }, ...prev];
       }
 
-      return [{ emoji, count: 1 }, ...prev];
+      return prev.map((e) =>
+        e.emoji === emoji ? { ...e, count: e.count + 1 } : e,
+      );
     });
   };
 

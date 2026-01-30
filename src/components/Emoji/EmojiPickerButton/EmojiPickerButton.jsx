@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import EmojiPicker from 'emoji-picker-react';
 import ic_emoji_add from '@/assets/icons/ic_emoji_add.svg';
-import { addEmoji } from '@/services/studyService';
+import { addEmojis } from '@/services/studyService';
 import styles from './EmojiPickerButton.module.css';
 
 export const EmojiPickerButton = ({ studyId, onAddEmoji }) => {
@@ -12,7 +12,7 @@ export const EmojiPickerButton = ({ studyId, onAddEmoji }) => {
 
   /* 이모지 클릭 핸들러 */
   const handleEmojiClick = async (emojiObject) => {
-    const emoji = emojiObject.emoji;
+    const { emoji } = emojiObject;
 
     onAddEmoji(emoji); // UI (즉시 화면 반영)
     setEmojiQueue((prev) => [...prev, emoji]); // 큐에 추가
@@ -29,14 +29,10 @@ export const EmojiPickerButton = ({ studyId, onAddEmoji }) => {
       setEmojiQueue([]);
       try {
         /* 스냅샷으로 API 호출 */
-        await addEmoji(studyId, tempQueue);
-        setEmojiQueue([]);
+        await addEmojis(studyId, tempQueue);
       } catch (error) {
         console.error(error);
         alert('이모지 추가 실패');
-
-        /* 실패 시 롤백 */
-        setEmojiQueue((prev) => [...tempQueue, ...prev]);
       }
     }, 500);
 

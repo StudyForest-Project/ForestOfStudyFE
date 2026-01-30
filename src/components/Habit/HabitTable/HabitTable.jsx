@@ -1,7 +1,7 @@
 import {
   pawVariants,
   pawDisabled,
-} from '../../../assets/icons/habitCheckIcons';
+} from '@/assets/icons/habitCheckIcons';
 import styles from './HabitTable.module.css';
 
 const DAYS = ['월', '화', '수', '목', '금', '토', '일'];
