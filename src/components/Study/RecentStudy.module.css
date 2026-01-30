@@ -20,3 +20,30 @@
   display: flex;
   gap: 24px;
 }
+
+.empty {
+  color: var(--gray-gray_818181, #818181);
+  font-family: Pretendard;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  height: 243px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 1px) {
+  .grid {
+    display: flex;
+    overflow-x: auto;
+    gap: 24px;
+    scrollbar-width: none;
+  }
+
+  .grid > * {
+    flex: 0 0 auto;
+    min-width: 260px;
+  }
+}
