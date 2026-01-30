@@ -1,0 +1,20 @@
+.emoji {
+  border: none;
+  border-radius: 50px;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 6px 8px;
+
+  font-size: 12px;
+  font-weight: 500;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.count {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 400;
+}

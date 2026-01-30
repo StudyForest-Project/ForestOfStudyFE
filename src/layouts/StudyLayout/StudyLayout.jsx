@@ -1,6 +1,6 @@
 import { Link, Outlet } from 'react-router';
 import styles from './StudyLayout.module.css';
-import logo from '../../assets/logo.png';
+import logo from '@/assets/logo.png';
 
 export const StudyLayout = () => {
   return (

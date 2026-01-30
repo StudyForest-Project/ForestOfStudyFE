@@ -1,7 +1,7 @@
 import { Link } from 'react-router';
 import { Outlet } from 'react-router';
 import styles from './RootLayout.module.css';
-import logo from '../../assets/logo.png';
+import logo from '@/assets/logo.png';
 import { PrimaryButton } from '../../components/PrimaryButton';
 
 export const RootLayout = () => {
