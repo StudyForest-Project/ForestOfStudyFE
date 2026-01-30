@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import styles from './StudyPage.module.css';
-import { useRecentStudies } from '../../../hooks/useRecentStudies';
+import styles from '@StudyPage.module.css'; //! alias로 변경
+import { useRecentStudies } from '@hooks/useRecentStudies'; //! alias로 변경
 import { StudyCard } from './StudyCard'; //! 추가
 // import { recentStudySeedData } from '../seed/seedStudyData'; // 향후 수정하여 반영
 // import  sections from './Recent.page..module.css'; //향후 수정하여 반영
