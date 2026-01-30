@@ -1,0 +1,17 @@
+.focusContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  border: 1px solid #dddddd;
+  border-radius: 50px;
+  padding: 40px 0;
+}
+
+.subTitle {
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 100%;
+  color: #414141;
+}
