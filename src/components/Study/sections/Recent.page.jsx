@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import styles from '@StudyPage.module.css'; //! alias로 변경
 import { useRecentStudies } from '@hooks/useRecentStudies'; //! alias로 변경
-import { StudyCard } from './StudyCard'; //! 추가
-// import { recentStudySeedData } from '../seed/seedStudyData'; // 향후 수정하여 반영
+import { StudyCard } from '@StudyCard'; //! 추가
+import { recentStudySeedData } from '@seed/seedStudyData'; //! 추가
 // import  sections from './Recent.page..module.css'; //향후 수정하여 반영
 
 export const RecentPage = () => {
@@ -23,14 +23,25 @@ export const RecentPage = () => {
 
   const handleShowLocalStorage = () => {
     const stored = localStorage.getItem('recentStudies');
-    console.log('[recentStudies raw]', stored);
-    console.log('[recentStudies parsed]', JSON.parse(stored || '[]'));
+    console.log('=== [recentStudies raw] ===');
+    console.log(stored);
+    console.log('=== [recentStudies parsed] ===');
+    console.log(JSON.parse(stored || '[]'));
+    alert('콘솔을 확인하세요! (F12)');
   };
 
   return (
     <section className={styles.container}>
       <h1>최근 조회한 스터디</h1>
 
+      {/* TODO: 온클릭 부분 */}
+      {process.env.NODE_ENV === 'development' && (
+        <div className={styles.devButtonGroup}>
+          <button onClick={handleSetSeedData}>시드 데이터 SET</button>
+          <button onClick={handleClearData}>초기화</button>
+          <button onClick={handleShowLocalStorage}>콘솔 출력</button>
+        </div>
+      )}
       {!hasRecent && <p>아직 조회한 스터디가 없습니다.</p>}
       {hasRecent && (
         <div className={styles.recentList}>
@@ -44,15 +55,6 @@ export const RecentPage = () => {
           ))}
         </div>
       )}
-
-      {/* 온클릭 부분 */}
-      {/* {process.env.NODE_ENV === 'development' && (
-        <div className={styles.devButtonGroup}>
-          <button onClick={handleSetSeedData}>시드 데이터 SET</button>
-          <button onClick={handleClearData}>초기화</button>
-          <button onClick={handleShowLocalStorage}>콘솔 출력</button>
-        </div>
-      )} */}
 
       {/* 테스트용 링크 */}
       <Link to="/study/1">상세페이지 예시로 이동</Link>
