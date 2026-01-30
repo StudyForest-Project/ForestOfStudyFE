@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import EmojiPicker from 'emoji-picker-react';
 import ic_emoji_add from '@/assets/icons/ic_emoji_add.svg';
 import { addEmojis } from '@/services/studyService';
+import { showWarningToast } from '@/utils/toast';
 import styles from './EmojiPickerButton.module.css';
 
 export const EmojiPickerButton = ({ studyId, onAddEmoji }) => {
@@ -32,7 +33,7 @@ export const EmojiPickerButton = ({ studyId, onAddEmoji }) => {
         await addEmojis(studyId, tempQueue);
       } catch (error) {
         console.error(error);
-        alert('이모지 추가 실패');
+        showWarningToast('이모지 추가에 실패했습니다');
       }
     }, 500);
 

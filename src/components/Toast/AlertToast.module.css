@@ -1,0 +1,33 @@
+.toast {
+  border-radius: 12px;
+  padding: 14px 28px;
+
+  font-size: 16px;
+  font-weight: 500;
+
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.text {
+  margin: 0;
+}
+
+.success {
+  background: var(--green-green_E1EDDE, #e1edde);
+  color: var(--green-green_text_578246, #578246);
+}
+
+.warning {
+  background: var(--pink-pink_FDE0E9, #fde0e9);
+  color: var(--red-red_F50E0E, #f50e0e);
+}
+
+/* Mobile */
+@media (max-width: 375px) {
+  .toast {
+    font-size: 14px;
+  }
+}
