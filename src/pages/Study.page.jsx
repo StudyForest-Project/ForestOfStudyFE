@@ -6,5 +6,5 @@ export const StudyPage = () => {
 
   if (!id) return <div>잘못된 접근입니다.</div>;
 
- // return <HabitSection studyId={id} />;
+  // return <HabitSection studyId={id} />;
 };
