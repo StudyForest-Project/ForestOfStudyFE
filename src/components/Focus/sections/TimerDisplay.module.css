@@ -1,0 +1,110 @@
+.timerDisplay {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.timeBadge {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 100px;
+  height: 30px;
+  border-radius: 50px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: white;
+  font-size: 16px;
+  font-weight: 500;
+  color: #414141;
+}
+
+.timerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px 0;
+  width: 100%;
+}
+
+.displayTime {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  font-size: 120px;
+  font-weight: 800;
+  color: #414141;
+}
+
+.sign {
+  font-size: 80px;
+  font-weight: 700;
+  margin-right: 15px;
+  color: inherit;
+  transform: translateY(-15px);
+  display: inline-block;
+}
+
+.timeUnit {
+  cursor: pointer;
+  padding: 0 2px;
+  transition: color 0.2s;
+  /* 숫자 폭 고정 */
+  font-variant-numeric: tabular-nums;
+}
+
+.separator {
+  padding: 0 4px;
+  color: inherit;
+  transform: translateY(-10px);
+  display: inline-block;
+}
+
+.seconds,
+.fixedSeconds {
+  font-size: 50px;
+  font-weight: 700;
+  color: #818181;
+  margin-left: 8px;
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+  width: 1.5ch;
+}
+
+.timerInput {
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: #414141;
+  text-align: center;
+  width: 2ch;
+  outline: none;
+  padding: 0 4px;
+  margin: 0;
+}
+
+.timerInput:focus {
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+}
+
+.timerInput::-webkit-outer-spin-button,
+.timerInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* 1분 미만 */
+.warning .displayTime,
+.warning .displayTime * {
+  color: #f50e0e;
+}
+
+/* 초과 시간 */
+.minus .displayTime,
+.minus .displayTime * {
+  color: #818181;
+}
