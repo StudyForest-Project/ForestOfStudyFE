@@ -1,6 +1,7 @@
-import { Link } from 'react-router-dom';
 import styles from './StudyPage.module.css';
 import { useRecentStudies } from '../../../hooks/useRecentStudies';
+import { Link } from 'react-router';
+
 
 export const RecentPage = () => {
   const { recentStudies } = useRecentStudies();
