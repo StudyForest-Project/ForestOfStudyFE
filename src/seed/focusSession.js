@@ -9,9 +9,9 @@ export const focusSession = {
       totalPoint: 99,
     },
     recentTargetTimes: [
-      { minutes: 25, label: '25:00' },
-      { minutes: 30, label: '30:00' },
-      { minutes: 15, label: '15:00' },
+      { minutes: 60, label: '01:00' },
+      { minutes: 25, label: '00:25' },
+      { minutes: 90, label: '01:30' },
     ],
   },
   // 알고리즘 루틴

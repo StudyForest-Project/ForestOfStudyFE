@@ -1,0 +1,126 @@
+.timerControls {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.timeList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  height: 30px;
+  margin-bottom: 20px;
+
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.2s ease;
+}
+
+.timeListHidden {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  height: 30px;
+  margin-bottom: 20px;
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.timeSelectButton {
+  width: 85px;
+  height: 30px;
+  border-radius: 50px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: white;
+  font-size: 16px;
+  font-weight: 500;
+  color: #414141;
+  cursor: pointer;
+}
+
+.timerButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 20px;
+}
+
+.leftButton,
+.centerButton,
+.rightButton {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.leftButton {
+  justify-content: flex-end;
+}
+
+.rightButton {
+  justify-content: flex-start;
+}
+
+.placeholder {
+  width: 60px;
+  height: 60px;
+}
+
+.iconOnlyButton {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  background-color: #578246;
+  color: white;
+  font-size: 30px;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.startButton,
+.stopButton {
+  background-color: #578246;
+  color: white;
+  width: 300px;
+  height: 60px;
+  border: none;
+  border-radius: 50px;
+  font-size: 28px;
+  font-weight: 700;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.startButton:disabled {
+  background-color: #99c08e;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.iconOnlyButton:disabled {
+  background-color: #99c08e;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.iconOnlyButton:focus,
+.startButton:focus,
+.stopButton:focus {
+  outline: none;
+}
