@@ -30,7 +30,7 @@ export function useRecentStudies() {
       const withoutDup = prev.filter((item) => item.studyId !== studyId); // 필터 스팰링 오타 수정함
       const newItem = {
         studyId,
-        viewedAt: new Date().toISOString(),
+        // viewedAt: new Date().toISOString(),
       };
       const updated = [newItem, ...withoutDup];
       return updated.slice(0, MAX_RECENT);
@@ -53,7 +53,7 @@ export function useRecentStudies() {
   };
 
   //get function add
-  // localStorage data => return   //? 이 설정값에 대한 개념 원리를 잘 이해 못하겠음, 왜 이 행위가 필요한 것인지
+  // localStorage data => return   //ok => 어느정도 이해 완료 (저장되어 있는것을 꺼내서 다시 구현)
   const getRecentStudies = () => {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
