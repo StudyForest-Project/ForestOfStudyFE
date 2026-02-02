@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router';
 export const StudyCard = ({ item }) => {
   const nav = useNavigate();
   const backgroundImage = item.backgroundImage;
+  const MS_PER_DAY = 1000 * 60 * 60 * 24;
   const bgStyle = {
     background: backgroundImage.startsWith('#')
       ? backgroundImage
@@ -12,7 +13,7 @@ export const StudyCard = ({ item }) => {
   };
 
   const getDays = (createdAt) =>
-    `${Math.floor((new Date() - new Date(createdAt)) / (1000 * 60 * 60 * 24))}일째 진행 중`;
+    `${Math.floor((new Date() - new Date(createdAt)) / MS_PER_DAY)}일째 진행 중`;
 
   const handleCardClick = () => {
     nav(`/study/${item.id}`);

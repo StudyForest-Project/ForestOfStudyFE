@@ -1,10 +1,10 @@
-import { NavButton } from '../components/NavButton';
+import { useParams } from 'react-router';
+// import { HabitSection } from '../components/Habit/HabitSection/HabitSection';
 
 export const StudyPage = () => {
-  return (
-    <>
-      <h1>스터디 상세 페이지</h1>
-      <NavButton to="habit">오늘의 습관</NavButton>
-    </>
-  );
+  const { id } = useParams();
+
+  if (!id) return <div>잘못된 접근입니다.</div>;
+
+  // return <HabitSection studyId={id} />;
 };

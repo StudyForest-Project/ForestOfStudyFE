@@ -1,0 +1,41 @@
+/* 요일 및 습관 데이터 행 */
+.row {
+  display: grid;
+  grid-template-columns: 200px repeat(7, 1fr);
+  align-items: center;
+  justify-items: center;
+}
+
+/* 요일 */
+.day {
+  color: var(--gray-gray_818181, #818181);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 26px;
+}
+
+/* 습관 제목 */
+.habitTitle {
+  color: var(--black-black_414141, #414141);
+  font-size: 18px;
+  font-weight: 700;
+  padding: 10px 24px;
+  justify-self: end;
+}
+
+/* Mobile */
+@media (max-width: 375px) {
+  .row {
+    grid-template-columns: 90px repeat(7, 36px);
+    column-gap: 14px;
+  }
+
+  .habitTitle,
+  .day {
+    font-size: 14px;
+  }
+
+  .habitTitle {
+    padding: 0 16px;
+  }
+}

@@ -1,0 +1,25 @@
+.container {
+  border-radius: 20px;
+  border: 1px solid var(--gray-gray_DDDDDD, #ddd);
+  padding: 24px;
+}
+
+.title {
+  margin: 0;
+  color: var(--black-black_414141, #414141);
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 24px;
+}
+
+/* Mobile */
+@media (max-width: 375px) {
+  .container {
+    overflow: hidden;
+    padding-top: 16px;
+    padding-left: 16px;
+  }
+  .title {
+    font-size: 18px;
+  }
+}

@@ -1,34 +1,26 @@
 import { useEffect, useState } from 'react';
 import styles from './BrowseStudy.module.css';
-import axios from 'axios';
 import { StudyCard } from './StudyCard.jsx';
 import searchIcon from '../../assets/icons/ic_search.svg';
 import toggleIcon from '../../assets/icons/ic_toggle.svg';
+import { getStudiesList } from '@/services/studyListService';
 
 export const BrowseStudy = () => {
   const [count, setCount] = useState(6);
   const [searchInput, setSearchInput] = useState('');
   const [searchKeyword, setSearchKeyword] = useState('');
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [sortState, setSortState] = useState('최근 순');
   const [studyData, setStudyData] = useState([]);
 
   useEffect(() => {
-    const getStudies = async () => {
-      try {
-        const response = await axios.get(
-          'http://localhost:8000/studies?pageSize=100',
-        );
-        setStudyData(response.data?.items || []);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    getStudies();
+    getStudiesList(100)
+      .then(setStudyData)
+      .catch(() => setStudyData([]));
   }, []);
 
   const totalCount = Array.isArray(studyData) ? studyData.length : 0;
-  const more = count < totalCount;
+  const hasMore = count < totalCount;
   const sortOption = [
     '최근 순',
     '오래된 순',
@@ -87,12 +79,12 @@ export const BrowseStudy = () => {
         </div>
         <div
           className={styles.toggleContainer}
-          onClick={() => setDropdownOpen(!dropdownOpen)}
+          onClick={() => setIsDropdownOpen(!isDropdownOpen)}
         >
           <span className={styles.toggleText}>{sortState}</span>
           <img src={toggleIcon} alt="토글" className={styles.toggleIcon} />
         </div>
-        {dropdownOpen && (
+        {isDropdownOpen && (
           <div className={styles.dropdownMenu}>
             {sortOption.map((option) => (
               <div
@@ -100,7 +92,7 @@ export const BrowseStudy = () => {
                 className={styles.dropdownItem}
                 onClick={() => {
                   setSortState(option);
-                  setDropdownOpen(false);
+                  setIsDropdownOpen(false);
                 }}
               >
                 {option}
@@ -111,11 +103,13 @@ export const BrowseStudy = () => {
       </div>
 
       <div className={styles.grid}>
-        {Array.isArray(items) ? (items.map((item) => <StudyCard key={item.id} item={item} />)) 
-        : (<div className={styles.empty}>아직 둘러 볼 스터디가 없어요</div>
+        {Array.isArray(items) && items.length > 0 ? (
+          items.map((item) => <StudyCard key={item.id} item={item} />)
+        ) : (
+          <div className={styles.empty}>아직 둘러 볼 스터디가 없어요</div>
         )}
       </div>
-      {more && (
+      {hasMore && (
         <button
           className={styles.moreBtn}
           onClick={() => setCount((c) => c + 3)}

@@ -8,10 +8,6 @@
   cursor: pointer;
 }
 
-/* .studyCard:hover {
-  border: 1px solid #F50E0E;
-} */ /* 왜 호버를 주면 카드들이 들썩들썩 거릴까 */
-
 .info {
   padding: 30px;
   display: flex;
@@ -33,8 +29,8 @@
   line-height: 1.3;
   flex: 1;
   margin: 0;
-  -webkit-line-clamp: 1; /* 강사님이 ellipsis 사용추천했지만*/
-  line-clamp: 1; /* ellpsis 상위호환 lice-clamp사용*/
+  -webkit-line-clamp: 1; 
+  line-clamp: 1; 
   -webkit-box-orient: vertical;
   overflow: hidden;
   display: -webkit-box;
@@ -74,8 +70,8 @@
   line-height: 24px;
   flex: 1;
   margin: 0;
-  -webkit-line-clamp: 3; /* 강사님이 ellipsis 사용추천했지만*/
-  line-clamp: 3; /* ellpsis 상위호환 lice-clamp사용*/
+  -webkit-line-clamp: 3; 
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
   display: -webkit-box;

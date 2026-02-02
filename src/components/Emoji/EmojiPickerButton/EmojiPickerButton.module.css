@@ -1,0 +1,22 @@
+.wrapper {
+  position: relative;
+}
+
+.addButton {
+  border-radius: 50px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.3);
+  padding: 6px 8px;
+
+  color: var(--black-black_414141, #414141);
+  font-size: 16px;
+  font-weight: 500;
+
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.emojiPicker {
+  position: absolute;
+}
