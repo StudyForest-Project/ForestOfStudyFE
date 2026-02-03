@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { RecentPage } from '../components/Study/sections/Recent.page';
+import { RecentPage } from '../components/Study/sections/RecentPage';
 import { BrowseStudiesPage } from '../components/Study/sections/BrowseStudies.page';
 
 export const HomePage = () => {

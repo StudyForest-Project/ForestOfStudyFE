@@ -39,15 +39,18 @@ export function useRecentStudies() {
 
   //!(테스트용 입니다. 내용 최종 검토후 변경가능)
   //set function add
-  // seed data => localStorage   // overwriteRecentStudies => 최근 목록 조회 덮어쓰기, 왜냐면 최근 목록이니깐 과거 목록은 덮어 써야하므로 오버라이트라고 명칭을 붙임
+
   const setRecentStudiesData = (overwriteRecentStudies) => {
     try {
-      setRecentStudiesData = overwriteRecentStudies;
+      const validData = Array.isArray(overwriteRecentStudies)
+        ? overwriteRecentStudies
+        : [];
+      setRecentStudies(validData);
       console.log('로컬스토리지 저장 완료', overwriteRecentStudies);
-      console.log('로컬스토리지에 저장된 개수', overwriteRecentStudies.lenght);
+      console.log('로컬스토리지에 저장된 개수', overwriteRecentStudies.length);
       return true;
     } catch (error) {
-      console.error('로컬스토리지 저장 실패');
+      console.error('로컬스토리지 저장 실패', error);
       return false;
     }
   };
@@ -59,8 +62,8 @@ export function useRecentStudies() {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) {
         const parse = safeParse(stored, []);
-        console.log('로컬스토리지에서 데이터 로드', parsed);
-        return parsed;
+        console.log('로컬스토리지에서 데이터 로드', parse);
+        return parse;
       }
       console.log('로컬스토리지에 데이터 없음');
       return [];
@@ -73,7 +76,7 @@ export function useRecentStudies() {
   return {
     recentStudies,
     addRecentStudy,
-    setRecentStudiesData, //! 추가(테스트용)
-    getRecentStudies, //! 추가(테스트용)
+    setRecentStudiesData,
+    getRecentStudies,
   };
 }
