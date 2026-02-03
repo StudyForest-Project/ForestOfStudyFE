@@ -1,11 +1,3 @@
-.section {
-  max-width: 1200px;
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
 .title {
   margin: 0;
   color: #414141;
@@ -17,10 +9,11 @@
 }
 
 .searchToggle {
-  height: 42px;
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  gap: 8px;
   position: relative;
 }
 
@@ -33,6 +26,7 @@
   border-radius: 15px;
   border: 1px solid #ddd;
   background: #fff;
+  box-sizing: border-box;
 }
 
 .searchIcon {
@@ -104,7 +98,7 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
 
@@ -125,6 +119,7 @@
 }
 
 .empty {
+  grid-column: 1 / -1;
   color: var(--gray-gray_818181, #818181);
   font-family: Pretendard;
   font-size: 20px;
@@ -132,36 +127,28 @@
   font-weight: 500;
   line-height: normal;
   height: 243px;
-  margin: 0 auto;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
-@media (min-width: 1px) {
-  .section {
-    padding: 40px;
-    gap: 24px;
-  }
-  .searchContainer {
-    width: 100%;
-    max-width: 280px;
-    width: 280px;
-  }
-  .toggleContainer {
-    width: 160px;
-    padding: 8px 12px;
-    font-size: 13px;
-  }
+@media (max-width: 744px) {
   .grid {
-    gap: 24px;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
   }
-  .moreBtn {
-    padding: 17px 119px;
+}
+
+@media (max-width: 500px) {
+  .searchToggle {
+    flex-direction: column;
+    align-items: stretch;
   }
 
-  .dropdownMenu {
-    width: 160px;
-    right: 0;
+  .searchContainer {
+    width: 100%;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
   }
 }

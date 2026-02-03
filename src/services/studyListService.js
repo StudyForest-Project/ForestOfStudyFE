@@ -1,10 +1,19 @@
-import axios from 'axios';
+import { publicApi } from './api';
 
-const BASE_URL = 'http://localhost:8000';
-
-export const getStudiesList = async (pageSize = 999) => {
-  const response = await axios.get(`${BASE_URL}/studies`, {
-    params: { pageSize },
+//GET /studies
+export const getStudiesList = async (
+  pageSize = 6,
+  search,
+  sort = 'recent',
+  cursor,
+) => {
+  const res = await publicApi.get(`/studies`, {
+    params: {
+      pageSize,
+      sort,
+      ...(search ? { search } : {}),
+      ...(cursor ? { cursor } : {}),
+    },
   });
-  return response.data.items;
+  return res.data;
 };
