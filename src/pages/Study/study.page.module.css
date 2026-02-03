@@ -1,0 +1,13 @@
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  position: relative;
+}
+
+@media (max-width: 375px) {
+  .topBar {
+    padding-top: 40px;
+  }
+}

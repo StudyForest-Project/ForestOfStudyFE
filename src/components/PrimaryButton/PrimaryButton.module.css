@@ -16,3 +16,20 @@
   font-weight: 400;
   text-shadow: 0 -2px 0 #578246;
 }
+
+@media (max-width: 744px) {
+  .button {
+    width: 160px;
+  }
+}
+
+@media (max-width: 375px) {
+  .button {
+    width: 106px;
+    height: 38px;
+    border-radius: 8px;
+  }
+  .text {
+    font-size: 12px;
+  }
+}

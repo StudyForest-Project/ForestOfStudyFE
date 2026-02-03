@@ -1,0 +1,32 @@
+/* 버튼 공통 스타일 */
+.actionMenu button {
+  border: none;
+  background: none;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* 공유, 수정 버튼 색상 */
+.actionMenu button:not(.deleteButton) {
+  color: var(--green-green_text_578246, #578246);
+}
+
+/* 삭제 버튼, 구분선 색상 */
+.deleteButton,
+.separator {
+  color: var(--gray-gray_818181, #818181);
+}
+
+/* Mobil */
+@media (max-width: 375px) {
+  .actionMenu button,
+  .actionMenu .separator {
+    font-size: 12px;
+  }
+
+  .actionMenu {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}

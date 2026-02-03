@@ -21,3 +21,9 @@
   position: absolute;
   gap: 10px;
 }
+
+@media (max-width: 375px) {
+  .moreButton {
+    display: none;
+  }
+}
