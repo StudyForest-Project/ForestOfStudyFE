@@ -1,5 +1,5 @@
 export { api, publicApi } from './api';
 export { default as authService } from './authService';
-export { default as studyService } from './studyService';
 export { default as focusService } from './focusService';
-export { verifyStudyPasswords } from './studyAuthService';
+export * from './studyService';
+export { default as studyAuthService } from './studyAuthService';
