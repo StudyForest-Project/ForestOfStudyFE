@@ -17,14 +17,14 @@ export const PasswordVerifyModal = ({
   const [showPassword, setShowPassword] = useState(false);
 
   /* 비밀번호 검증 로직 */
-  const { verifyPassword } = useStudyAuth(studyId);
+  const { verifyStudyPassword } = useStudyAuth(studyId);
 
   /* 비밀번호 검증 버튼 클릭 핸들러 */
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      await verifyPassword(password);
+      await verifyStudyPassword(password);
       onSuccess();
       onClose();
     } catch {
@@ -73,9 +73,9 @@ export const PasswordVerifyModal = ({
             </button>
           </div>
 
-            <PrimaryButton type="submit" className={styles.submitButton}>
-              {actionText}
-            </PrimaryButton>
+          <PrimaryButton type="submit" className={styles.submitButton}>
+            {actionText}
+          </PrimaryButton>
         </form>
       </div>
     </div>
