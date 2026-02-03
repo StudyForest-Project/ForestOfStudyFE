@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { NavButton } from '@/components';
 import { PointBadge } from '@/components/PointBadge';
 import { PasswordVerifyModal } from '@/components/PasswordVerifyModal/PasswordVerifyModal';
+import { useStudyAuth } from '@/hooks/useStudyAuth';
 import styles from './StudyOverviewSection.module.css';
 
 /* 버튼 타입별 이동 경로와 문구 */
@@ -21,12 +22,17 @@ const ACTION_CONFIG = {
 
 export const StudyOverviewSection = ({ study }) => {
   const navigate = useNavigate();
+  const { isVerified } = useStudyAuth(study?.id);
   /* 현재 선택된 액션 (habit | focus), null이면 모달 닫힘 */
   const [currentAction, setCurrentAction] = useState(null);
 
   if (!study) return null;
 
   const handleActionClick = (type) => {
+    if (isVerified) {
+      navigate(ACTION_CONFIG[type].path);
+      return;
+    }
     setCurrentAction(type);
   };
 
