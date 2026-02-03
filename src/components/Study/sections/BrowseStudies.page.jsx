@@ -3,7 +3,7 @@ import { BrowseStudy } from '../BrowseStudy';
 
 export const BrowseStudiesPage = () => {
   return (
-    <section className={styles.container}>
+    <section className={`${styles.container} ${styles.browseSection}`}>
       <BrowseStudy />
     </section>
   );

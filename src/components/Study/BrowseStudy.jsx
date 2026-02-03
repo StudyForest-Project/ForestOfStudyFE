@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from './BrowseStudy.module.css';
 import { StudyCard } from './StudyCard.jsx';
 import searchIcon from '../../assets/icons/ic_search.svg';
@@ -16,6 +16,7 @@ const SORT_OPTIONS = [
 ];
 
 export const BrowseStudy = () => {
+  const inputRef = useRef(null);
   const [searchInput, setSearchInput] = useState('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const studyData = useStudyListStore((s) => s.studyData);
@@ -43,18 +44,29 @@ export const BrowseStudy = () => {
     <>
       <h2 className={styles.title}>스터디 둘러보기</h2>
       <div className={styles.searchToggle}>
-        <div className={styles.searchContainer}>
+        <form className={styles.searchContainer} onSubmit={handleSearchSubmit}>
           <img src={searchIcon} alt="돋보기" className={styles.searchIcon} />
-          <form onSubmit={handleSearchSubmit}>
-            <input
-              className={styles.searchInput}
-              type="search"
-              placeholder="검색"
-              value={searchInput}
-              onChange={(e) => setSearchInput(e.target.value)}
-            />
-          </form>
-        </div>
+          <input
+            ref={inputRef}
+            className={styles.searchInput}
+            type="text"
+            placeholder="검색"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+          />
+          {searchInput && (
+            <button
+              type="button"
+              className={styles.clearBtn}
+              onClick={() => {
+                setSearchInput('');
+                inputRef.current?.focus();
+              }}
+            >
+              ×
+            </button>
+          )}
+        </form>
         <div
           className={styles.toggleContainer}
           onClick={() => setIsDropdownOpen(!isDropdownOpen)}
