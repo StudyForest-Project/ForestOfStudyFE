@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { EmojiList } from '../EmojiList';
-import { EmojiPickerButton } from '../EmojiPickerButton';
+import { EmojiList } from '@/components/Emoji/EmojiList';
+import { EmojiPickerButton } from '@/components/Emoji/EmojiPickerButton';
 import styles from './EmojiSection.module.css';
 
 export const EmojiSection = ({ studyId, initialEmojis }) => {
