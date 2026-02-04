@@ -14,3 +14,10 @@
   justify-content: space-between;
   gap: 14px;
 }
+
+/* Mobile */
+@media (max-width: 375px) {
+  .button {
+    padding: 8px 10px;
+  }
+}

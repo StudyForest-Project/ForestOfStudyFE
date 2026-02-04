@@ -1,0 +1,24 @@
+.currentTime {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.label {
+  color: var(--gray-gray_818181, #818181);
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.timeBadge {
+  margin: 0;
+  border-radius: 50px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.3);
+  padding: 8px 12px;
+
+  color: var(--black-black_414141, #414141);
+  font-size: 16px;
+  font-weight: 500;
+}
