@@ -40,7 +40,7 @@
   background-color: white;
   font-size: 16px;
   font-weight: 500;
-  color: #414141;
+  color: var(--gray-01);
   cursor: pointer;
 }
 
@@ -79,7 +79,7 @@
   height: 60px;
   border-radius: 50%;
   border: none;
-  background-color: #578246;
+  background-color: var(--green-01);
   color: white;
   font-size: 30px;
   font-weight: 700;
@@ -91,7 +91,7 @@
 
 .startButton,
 .stopButton {
-  background-color: #578246;
+  background-color: var(--green-01);
   color: white;
   width: 300px;
   height: 60px;
@@ -108,13 +108,13 @@
 }
 
 .startButton:disabled {
-  background-color: #99c08e;
+  background-color: var(--green-02);
   cursor: not-allowed;
   pointer-events: none;
 }
 
 .iconOnlyButton:disabled {
-  background-color: #99c08e;
+  background-color: var(--green-02);
   cursor: not-allowed;
   pointer-events: none;
 }

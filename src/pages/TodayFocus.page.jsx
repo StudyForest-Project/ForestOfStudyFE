@@ -4,6 +4,7 @@ import { useFetchData } from '@/hooks/useFetchData';
 import styles from './TodayFocus.module.css';
 import { PointBadge } from '@/components/PointBadge';
 import { NavButton } from '@/components';
+import { updateRecentTime } from '@/utils/timerUtils';
 
 export const TodayFocusPage = () => {
   const { studyId } = useParams();
@@ -20,9 +21,22 @@ export const TodayFocusPage = () => {
     }));
   };
 
-  if (isLoading) {return <div>정보를 불러오는 중입니다...</div>};
-  if (error) {return <div>데이터를 불러오는 중 오류가 발생했습니다.</div>};
-  if (!data) {return <div>데이터를 불러올 수 없습니다.</div>};
+  const updatedTimeList = (minutes, label) => {
+    setData((prev) => ({
+      ...prev,
+      timeList: updateRecentTime(prev.timeList, minutes, label), // 유틸 사용
+    }));
+  };
+
+  if (isLoading) {
+    return <div>정보를 불러오는 중입니다...</div>;
+  }
+  if (error) {
+    return <div>데이터를 불러오는 중 오류가 발생했습니다.</div>;
+  }
+  if (!data) {
+    return <div>데이터를 불러올 수 없습니다.</div>;
+  }
 
   return (
     <div>
@@ -30,7 +44,7 @@ export const TodayFocusPage = () => {
         <h1 className={styles.studyTitle}>{data.study.title}</h1>
 
         <div className={styles.nav}>
-          <NavButton to="habit">오늘의 습관</NavButton>
+          <NavButton to="../habit">오늘의 습관</NavButton>
           <NavButton to="..">홈</NavButton>
         </div>
       </div>
@@ -79,7 +93,8 @@ export const TodayFocusPage = () => {
           <Outlet
             context={{
               studyId,
-              initialTimeList: data.timeList,
+              timeList: data.timeList,
+              onUpdateTimeList: updatedTimeList,
               onSaveSuccess: updatedPoint,
             }}
           />

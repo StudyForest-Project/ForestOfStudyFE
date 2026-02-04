@@ -1,3 +1,22 @@
+:root {
+  --background: #F6F4EF;
+
+  --green-01: #578246;
+  --green-02: #99C08E;
+  --green-03: #B2D570;
+  --green-04: #D2E869;
+
+  --gray-01: #414141;
+  --gray-02: #818181;
+  --gray-03: #DDDDDD;
+  --gray-04: #EEEEEE;
+
+  --red-01: #C41013;
+  --red-02: #F50E0E;
+  --red-03: #FFA3A5;
+  --red-04: #FDE0E9;
+}
+
 body {
   font-family: 'Pretendard', sans-serif;
   background: var(--bg-bg_F6F4EF, #f6f4ef);
