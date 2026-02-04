@@ -1,0 +1,162 @@
+.form {
+  padding: 24px;
+  background: white;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0px;
+  color: #333;
+}
+
+.inputSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.label {
+  color: var(--black-black_414141, #414141);
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
+}
+
+.input {
+  width: 100%;
+  height: 48px;
+  padding: 15px 20px;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  background: #fff;
+  box-sizing: border-box;
+  color: var(--gray-gray_818181, #818181);
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.descriptionInput {
+  height: 98px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  resize: none !important;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* 스크롤바 안보이게하기
+.descriptionInput::-webkit-scrollbar {
+  display: none;
+} */
+
+.bgSection {
+  gap: 24px;
+}
+
+.bgGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.bgItem {
+  width: 100%;
+  height: 150px;
+  border-radius: 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: var(--blue-blue_E0F1F5, #e0f1f5);
+  cursor: pointer;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 0.2s ease;
+  position: relative;
+}
+.selectIcon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.selectIcon img {
+  width: 32px;
+  height: 32px;
+}
+
+.passwordContainer,
+.passwordVerifyContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.visibilityButton {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.visibilityButton img {
+  width: 24px;
+  height: 24px;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.createBtn {
+  width: 100%;
+  margin-top: 16px;
+}
+
+.errorMsg {
+  color: var(--red-error_C41013, #c41013);
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+  margin-top: -8px;
+}
+
+@media (max-width: 375px) {
+  .bgGrid {
+    grid-template-columns: repeat(2, 1fr); /* 모바일: 2열 */
+    gap: 10px;
+  }
+
+  .form {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .bgItem {
+    height: 148px;
+  }
+}
