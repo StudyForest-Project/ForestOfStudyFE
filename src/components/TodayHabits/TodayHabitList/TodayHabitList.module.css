@@ -1,0 +1,57 @@
+.sectionCard {
+  border-radius: 20px;
+  border: 1px solid var(--gray-gray_DDDDDD, #ddd);
+  padding: 40px;
+}
+
+/* 오늘의 습관 제목 + 목록 수정 버튼 */
+.sectionTop {
+  width: 400px;
+  max-width: 100%;
+
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  margin: 0;
+  color: var(--black-black_414141, #414141);
+  font-size: 24px;
+  font-weight: 800;
+
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* 목록 수정 버튼 */
+.button {
+  border: none;
+  background: none;
+
+  color: var(--gray-gray_818181, #818181);
+  font-size: 14px;
+  font-weight: 500;
+
+  position: absolute;
+  right: 0;
+}
+
+/* Mobile */
+@media (max-width: 375px) {
+  .sectionCard {
+    padding: 24px 16px;
+  }
+
+  .sectionTop {
+    width: 280px;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+}

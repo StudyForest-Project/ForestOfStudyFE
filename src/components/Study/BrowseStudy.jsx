@@ -1,101 +1,92 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from './BrowseStudy.module.css';
 import { StudyCard } from './StudyCard.jsx';
 import searchIcon from '../../assets/icons/ic_search.svg';
 import toggleIcon from '../../assets/icons/ic_toggle.svg';
-import { getStudiesList } from '@/services/studyListService';
+import useStudyListStore from '@/stores/useStudyListStore';
+// import { showWarningToast } from '@/utils/toast';
+
+const PAGE_SIZE = 6;
+const MORE_PAGE_SIZE = 12;
+const SORT_OPTIONS = [
+  { label: '최근 순', value: 'recent' },
+  { label: '오래된 순', value: 'oldest' },
+  { label: '많은 포인트 순', value: 'mostPoints' },
+  { label: '적은 포인트 순', value: 'leastPoints' },
+];
 
 export const BrowseStudy = () => {
-  const [count, setCount] = useState(6);
+  const inputRef = useRef(null);
   const [searchInput, setSearchInput] = useState('');
-  const [searchKeyword, setSearchKeyword] = useState('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [sortState, setSortState] = useState('최근 순');
-  const [studyData, setStudyData] = useState([]);
+  const studyData = useStudyListStore((s) => s.studyData);
+  const fetchStudies = useStudyListStore((s) => s.fetchStudies);
+  const nextCursor = useStudyListStore((s) => s.nextCursor);
+
+  const [sortState, setSortState] = useState('recent');
 
   useEffect(() => {
-    getStudiesList(100)
-      .then(setStudyData)
-      .catch(() => setStudyData([]));
+    fetchStudies(PAGE_SIZE, '', 'recent', null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const totalCount = Array.isArray(studyData) ? studyData.length : 0;
-  const hasMore = count < totalCount;
-  const sortOption = [
-    '최근 순',
-    '오래된 순',
-    '많은 포인트 순',
-    '적은 포인트 순',
-  ];
-  const items = Array.isArray(studyData)
-    ? studyData
-        .filter((item) =>
-          [item.title, item.nickname, item.description].some(
-            (
-              field, //모든 필드 검색
-            ) =>
-              field
-                .replace(/\s+/g, '') //띄어쓰기 무시
-                .toLowerCase()
-                .includes(searchKeyword.replace(/\s+/g, '').toLowerCase()), //소문자로 변경해서 구분 (Upper로 입력해도 호환되게)
-          ),
-        )
-        .sort((a, b) => {
-          switch (sortState) {
-            case '최근 순':
-              return new Date(b.createdAt) - new Date(a.createdAt);
-            case '오래된 순':
-              return new Date(a.createdAt) - new Date(b.createdAt);
-            case '많은 포인트 순':
-              return b.totalPoint - a.totalPoint;
-            case '적은 포인트 순':
-              return a.totalPoint - b.totalPoint;
-            default:
-              return 0;
-          }
-        })
-        .slice(0, count)
-    : [];
+  console.log(studyData, '>>>>>>');
+  console.log(nextCursor);
+
+  const currentSortLabel = SORT_OPTIONS.find((o) => o.value === sortState).label;
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    fetchStudies(6, searchInput.trim(), sortState, null);
+  };
 
   return (
-    <section className={styles.section}>
+    <>
       <h2 className={styles.title}>스터디 둘러보기</h2>
       <div className={styles.searchToggle}>
-        <div className={styles.searchContainer}>
+        <form className={styles.searchContainer} onSubmit={handleSearchSubmit}>
           <img src={searchIcon} alt="돋보기" className={styles.searchIcon} />
           <input
+            ref={inputRef}
             className={styles.searchInput}
-            type="search"
+            type="text"
             placeholder="검색"
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                setSearchKeyword(searchInput);
-                e.currentTarget.blur();
-              }
-            }}
           />
-        </div>
+          {searchInput && (
+            <button
+              type="button"
+              className={styles.clearBtn}
+              onClick={() => {
+                setSearchInput('');
+                inputRef.current?.focus();
+              }}
+            >
+              ×
+            </button>
+          )}
+        </form>
         <div
           className={styles.toggleContainer}
           onClick={() => setIsDropdownOpen(!isDropdownOpen)}
         >
-          <span className={styles.toggleText}>{sortState}</span>
+          <span className={styles.toggleText}>{currentSortLabel}</span>
           <img src={toggleIcon} alt="토글" className={styles.toggleIcon} />
         </div>
         {isDropdownOpen && (
           <div className={styles.dropdownMenu}>
-            {sortOption.map((option) => (
+            {SORT_OPTIONS.map((option) => (
               <div
-                key={option}
+                key={option.value}
                 className={styles.dropdownItem}
                 onClick={() => {
-                  setSortState(option);
+                  setSortState(option.value);
                   setIsDropdownOpen(false);
+                  fetchStudies(6, searchInput, option.value, null);
                 }}
               >
-                {option}
+                {option.label}
               </div>
             ))}
           </div>
@@ -103,20 +94,22 @@ export const BrowseStudy = () => {
       </div>
 
       <div className={styles.grid}>
-        {Array.isArray(items) && items.length > 0 ? (
-          items.map((item) => <StudyCard key={item.id} item={item} />)
+        {Array.isArray(studyData) && studyData.length > 0 ? (
+          studyData.map((item) => <StudyCard key={item.id} item={item} />)
         ) : (
           <div className={styles.empty}>아직 둘러 볼 스터디가 없어요</div>
         )}
       </div>
-      {hasMore && (
+      {nextCursor !== null && (
         <button
           className={styles.moreBtn}
-          onClick={() => setCount((c) => c + 3)}
+          onClick={() =>
+            fetchStudies(MORE_PAGE_SIZE, searchInput, sortState, nextCursor)
+          }
         >
           더보기
         </button>
       )}
-    </section>
+    </>
   );
 };

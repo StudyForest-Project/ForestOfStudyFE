@@ -2,8 +2,12 @@ import styles from './StudyCard.module.css';
 import ic_point from '../../assets/icons/ic_point.svg';
 import { useNavigate } from 'react-router';
 
+export const RECENT_KEY = 'recentStudies';
+const MAX = 3;
+
 export const StudyCard = ({ item }) => {
-  const nav = useNavigate();
+  const navigate = useNavigate();
+
   const backgroundImage = item.backgroundImage;
   const MS_PER_DAY = 1000 * 60 * 60 * 24;
   const bgStyle = {
@@ -16,7 +20,25 @@ export const StudyCard = ({ item }) => {
     `${Math.floor((new Date() - new Date(createdAt)) / MS_PER_DAY)}일째 진행 중`;
 
   const handleCardClick = () => {
-    nav(`/study/${item.id}`);
+    const stored = JSON.parse(localStorage.getItem(RECENT_KEY) || '[]');
+    const filtered = stored.filter((s) => s.id !== item.id);
+
+    const recentItem = [
+      {
+        id: item.id,
+        nickname: item.nickname,
+        title: item.title,
+        totalPoint: item.totalPoint,
+        createdAt: item.createdAt,
+        description: item.description,
+        emojis: item.emojis,
+        backgroundImage: item.backgroundImage,
+      },
+      ...filtered,
+    ].slice(0, MAX);
+
+    localStorage.setItem(RECENT_KEY, JSON.stringify(recentItem));
+    navigate(`/studies/${item.id}`);
   };
 
   return (
