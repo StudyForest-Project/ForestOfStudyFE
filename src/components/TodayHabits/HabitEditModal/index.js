@@ -1,1 +1,1 @@
-export { HabitEditModal } from './HabitEditModal.jsx.jsx';
+export { HabitEditModal } from './HabitEditModal.jsx';

@@ -1,10 +1,15 @@
 import { useState } from 'react';
 import { HabitEditModal } from '../HabitEditModal';
 import styles from './TodayHabitList.module.css';
+import clsx from 'clsx';
 
-export const TodayHabitList = () => {
+export const TodayHabitList = ({ studyId, habits, onToggle }) => {
   const [isEditOpen, setIsEditOpen] = useState(false);
-  const [habits, setHabits] = useState([]);
+
+  /* 습관 수정 모달 열기 */
+  const handleOpenEditModal = () => {
+    setIsEditOpen(true);
+  };
 
   return (
     <div className={styles.sectionCard}>
@@ -13,18 +18,37 @@ export const TodayHabitList = () => {
         <button
           type="button"
           className={styles.button}
-          onClick={() => setIsEditOpen(true)}
+          onClick={handleOpenEditModal}
         >
           목록 수정
         </button>
 
         {isEditOpen && (
           <HabitEditModal
+            studyId={studyId}
             initialHabits={habits}
             onClose={() => setIsEditOpen(false)}
           />
         )}
       </div>
+
+      <section>
+        <ul>
+          {habits.map((habit) => (
+            <li key={habit.habitId}>
+              <button
+                className={clsx(
+                  styles.habitItem,
+                  habit.checked && styles.checkedHabitItem,
+                )}
+                onClick={() => onToggle(habit.habitId, habit.checked)}
+              >
+                {habit.title}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </section>
     </div>
   );
 };

@@ -10,7 +10,7 @@ export const PageHeader = ({ title, studyId, now }) => {
 
         <nav className={styles.navButtonWrapper}>
           <NavButton to={`/studies/${studyId}/focus`}>오늘의 집중</NavButton>
-          <NavButton to="/">홈</NavButton>
+          <NavButton to={`/studies/${studyId}`}>스터디 상세</NavButton>
         </nav>
       </div>
 
