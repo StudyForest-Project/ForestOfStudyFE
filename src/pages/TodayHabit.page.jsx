@@ -23,7 +23,7 @@ export const TodayHabitPage = () => {
 
   return (
     <div>
-      <PageHeader title={studyTitle} now={now} />
+      <PageHeader title={studyTitle} studyId={studyId} now={now} />
       <TodayHabitList />
     </div>
   );
