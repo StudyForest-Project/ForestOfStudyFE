@@ -24,7 +24,7 @@ function App() {
         <Route path="/" element={<RootLayout />}>
           <Route index element={<HomePage />} />
           <Route path="/studyCreate" element={<StudyCreatePage />} />
-          <Route path="/studyModify" element={<StudyCreatePage />} />
+          <Route path="/:studyId/studyModify" element={<StudyCreatePage />} />
         </Route>
 
         <Route path="/studies/:studyId" element={<StudyLayout />}>

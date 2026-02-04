@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import styles from './CreateStudy.module.css';
 import { PrimaryButton } from '../PrimaryButton';
 import bgImg1 from '@/assets/img/bg_img_1.jpg';
@@ -8,28 +8,57 @@ import bgImg4 from '@/assets/img/bg_img_4.jpg';
 import selectIcon from '@/assets/icons/ic_bg_selected.svg';
 import visibility_off from '@/assets/icons/ic_visibility_off.svg';
 import visibility_on from '@/assets/icons/ic_visibility_on.svg';
-import { createStudy } from '@/services';
-import { useLocation, useNavigate } from 'react-router';
+import { createStudy, patchStudy } from '@/services';
+import { useLocation, useNavigate, useParams } from 'react-router';
 import useCrateStudyStore from '@/stores/useStudyFormStore';
 
+const backgrounds = [
+  { type: 'color', value: '#E1EDDE' },
+  { type: 'color', value: '#FFF1CC' },
+  { type: 'color', value: '#E0F1F5' },
+  { type: 'color', value: '#FDE0E9' },
+  { type: 'image', value: bgImg1 },
+  { type: 'image', value: bgImg2 },
+  { type: 'image', value: bgImg3 },
+  { type: 'image', value: bgImg4 },
+];
+
 export const CreateStudy = () => {
-  const [selectedBgIndex, setSelectedBgIndex] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordVerify, setShowPasswordVerify] = useState(false);
   const [showErrors, setShowErrors] = useState(false);
   const { pathname } = useLocation();
+  const { studyId } = useParams();
   const formData = useCrateStudyStore((s) => s.formData);
   const setField = useCrateStudyStore((s) => s.setField);
+  const setFormData = useCrateStudyStore((s) => s.setFormData);
   const resetFormData = useCrateStudyStore((s) => s.resetFormData);
   const nav = useNavigate();
 
-  console.log(formData);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setField(name, value);
   };
 
-  const isModify = pathname === '/studyModify';
+  const isModify = pathname.split('/')[2] === 'studyModify';
+  useEffect(() => {
+    if (!isModify || !studyId) return;
+    const save = sessionStorage.getItem(`studyForm:${studyId}`);
+    if (!save) return;
+
+    try {
+      setFormData(JSON.parse(save));
+    } catch {
+      sessionStorage.removeItem(`studyForm:${studyId}`);
+    }
+  }, [isModify, studyId, setFormData]);
+
+  const selectedBgIndex = useMemo(() => {
+    const bgValue = formData.backgroundImage;
+    if (!bgValue) return null;
+    const idx = backgrounds.findIndex((bg) => bg.value === bgValue);
+    return idx >= 0 ? idx : null;
+  }, [formData.backgroundImage]);
 
   const handleSubmit = async () => {
     const studyData = {
@@ -59,25 +88,41 @@ export const CreateStudy = () => {
     }
   };
 
-  const backgrounds = [
-    { type: 'color', value: '#E1EDDE' },
-    { type: 'color', value: '#FFF1CC' },
-    { type: 'color', value: '#E0F1F5' },
-    { type: 'color', value: '#FDE0E9' },
-    { type: 'image', value: bgImg1 },
-    { type: 'image', value: bgImg2 },
-    { type: 'image', value: bgImg3 },
-    { type: 'image', value: bgImg4 },
-  ];
+  const handleModifySubmit = async () => {
+    const studyData = {
+      nickname: formData.nickname,
+      title: formData.title,
+      description: formData.description,
+      backgroundImage: formData.backgroundImage,
+    };
+
+    const hasEmptyField = Object.values(studyData).some((field) => !field);
+
+    if (hasEmptyField) {
+      setShowErrors(true);
+      return;
+    }
+
+    try {
+      const response = await patchStudy(studyId, studyData);
+      const item = response.study;
+      resetFormData();
+      nav(`/studies/${item.id}`);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const handleBgSelect = (index) => {
     const isDeselecting = index === selectedBgIndex;
-    setSelectedBgIndex(isDeselecting ? null : index);
     setField('backgroundImage', isDeselecting ? '' : backgrounds[index].value);
   };
   return (
     <form className={styles.form}>
-      <h2 className={styles.title}>스터디만들기</h2>
+      <h2 className={styles.title}>
+        {' '}
+        {!isModify ? '스터디만들기' : '스터디수정하기'}
+      </h2>
       <div className={styles.inputSection}>
         <p className={styles.label}>닉네임</p>
         <input
@@ -219,7 +264,10 @@ export const CreateStudy = () => {
         </>
       )}
 
-      <PrimaryButton className={styles.createBtn} onClick={handleSubmit}>
+      <PrimaryButton
+        className={styles.createBtn}
+        onClick={isModify ? handleModifySubmit : handleSubmit}
+      >
         {isModify ? '수정하기' : '만들기'}
       </PrimaryButton>
     </form>
