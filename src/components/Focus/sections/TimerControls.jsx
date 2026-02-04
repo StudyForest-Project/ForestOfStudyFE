@@ -87,10 +87,11 @@ export default function TimerControls({
     setIsPaused(false);
 
     const result = await saveFocusSession();
+    console.log('save result:', result);
 
-    if (result && result.focusSession && result.focusSession.earnedPoints > 0) {
+    if (result.focusResult.earnedPoints > 0) {
       showSuccessToast(
-        result.focusSession.earnedPoints + '포인트가 적립되었습니다',
+        result.focusResult.earnedPoints + '포인트가 적립되었습니다',
       );
     }
   };
@@ -102,13 +103,9 @@ export default function TimerControls({
     if (isPaused) {
       const result = await saveFocusSession();
 
-      if (
-        result &&
-        result.focusSession &&
-        result.focusSession.earnedPoints > 0
-      ) {
+      if (result.focusResult.earnedPoints > 0) {
         showSuccessToast(
-          result.focusSession.earnedPoints + '포인트가 적립되었습니다',
+          result.focusResult.earnedPoints + '포인트가 적립되었습니다',
         );
       }
     }

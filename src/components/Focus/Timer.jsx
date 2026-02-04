@@ -5,7 +5,6 @@ import {
   validateRange,
   getTimeUnits,
   formatDisplayTime,
-  updateRecentTime as updateTimeList,
 } from '@/utils/timerUtils';
 import { useClickOutside, useEnterKey } from '@/hooks/useTimerInputControl';
 import { useTimer } from '@/hooks/useTimer';
@@ -15,7 +14,8 @@ import TimerControls from '@/components/Focus/sections/TimerControls';
 import styles from './Timer.module.css';
 
 export default function Timer() {
-  const { studyId, initialTimeList, onSaveSuccess } = useOutletContext();
+  const { studyId, timeList, onUpdateTimeList, onSaveSuccess } =
+    useOutletContext();
 
   const [isInputMode, setInputMode] = useState(null); // 타이머 입력 모드 : null, "hour", "minute"
   const [inputHours, setInputHours] = useState(''); // 시간 입력
@@ -24,8 +24,6 @@ export default function Timer() {
   const hourInputRef = useRef(null);
   const minuteInputRef = useRef(null);
   const inputContainerRef = useRef(null);
-
-  const [timeList, setTimeList] = useState(initialTimeList);
 
   const {
     targetTime,
@@ -108,6 +106,8 @@ export default function Timer() {
       if (result && result.totalPoint !== undefined) {
         onSaveSuccess(result.totalPoint);
       }
+
+      return result;
     } catch (error) {
       console.error(error);
     }
@@ -145,9 +145,7 @@ export default function Timer() {
         setIsPaused={setIsPaused}
         setInputMode={setInputMode}
         isPauseUsedRef={isPauseUsedRef}
-        updateTimeList={(minutes, label) =>
-          setTimeList((prev) => updateTimeList(prev, minutes, label))
-        } //
+        updateTimeList={onUpdateTimeList}
         saveFocusSession={handleSaveFocus}
         updateTimerValues={updateTimerValues}
       />
