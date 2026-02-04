@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './CreateStudy.module.css';
 import { PrimaryButton } from '../PrimaryButton';
 import bgImg1 from '@/assets/img/bg_img_1.jpg';
@@ -8,30 +8,28 @@ import bgImg4 from '@/assets/img/bg_img_4.jpg';
 import selectIcon from '@/assets/icons/ic_bg_selected.svg';
 import visibility_off from '@/assets/icons/ic_visibility_off.svg';
 import visibility_on from '@/assets/icons/ic_visibility_on.svg';
-import { publicApi } from '@/services';
-import { useNavigate } from 'react-router';
+import { createStudy } from '@/services';
+import { useLocation, useNavigate } from 'react-router';
+import useCrateStudyStore from '@/stores/useStudyFormStore';
 
 export const CreateStudy = () => {
-  const [selectedBgIndex, setSelectedBgIndex] = useState(-1);
+  const [selectedBgIndex, setSelectedBgIndex] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordVerify, setShowPasswordVerify] = useState(false);
   const [showErrors, setShowErrors] = useState(false);
-
-  const [formData, setFormData] = useState({
-    nickname: '',
-    title: '',
-    description: '',
-    backgroundImage: '',
-    password: '',
-    passwordVerify: '',
-  });
+  const { pathname } = useLocation();
+  const formData = useCrateStudyStore((s) => s.formData);
+  const setField = useCrateStudyStore((s) => s.setField);
+  const resetFormData = useCrateStudyStore((s) => s.resetFormData);
   const nav = useNavigate();
-  const handleChange = useCallback(
-    (field) => (e) => {
-      setFormData((prev) => ({ ...prev, [field]: e.target.value }));
-    },
-    [],
-  );
+
+  console.log(formData);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setField(name, value);
+  };
+
+  const isModify = pathname === '/studyModify';
 
   const handleSubmit = async () => {
     const studyData = {
@@ -39,11 +37,12 @@ export const CreateStudy = () => {
       title: formData.title,
       description: formData.description,
       backgroundImage: formData.backgroundImage,
-      password: formData.password,
+      ...(isModify ? {} : { password: formData.password }),
     };
 
     const hasEmptyField = Object.values(studyData).some((field) => !field);
-    const passwordMismatch = formData.password !== formData.passwordVerify;
+    const passwordMismatch =
+      !isModify && formData.password !== formData.passwordVerify;
 
     if (hasEmptyField || passwordMismatch) {
       setShowErrors(true);
@@ -51,9 +50,10 @@ export const CreateStudy = () => {
     }
 
     try {
-      const response = await publicApi.post('/studies', studyData);
-      const item = response.data.study;
-      nav(`/study/${item.id}`);
+      const response = await createStudy(studyData);
+      const item = response.study;
+      resetFormData();
+      nav(`/studies/${item.id}`);
     } catch (error) {
       console.error(error);
     }
@@ -71,11 +71,9 @@ export const CreateStudy = () => {
   ];
 
   const handleBgSelect = (index) => {
-    setSelectedBgIndex(index);
-    setFormData((prev) => ({
-      ...prev,
-      backgroundImage: backgrounds[index].value,
-    }));
+    const isDeselecting = index === selectedBgIndex;
+    setSelectedBgIndex(isDeselecting ? null : index);
+    setField('backgroundImage', isDeselecting ? '' : backgrounds[index].value);
   };
   return (
     <form className={styles.form}>
@@ -86,8 +84,9 @@ export const CreateStudy = () => {
           type="text"
           className={styles.input}
           placeholder="닉네임을 입력해 주세요"
+          name="nickname"
           value={formData.nickname}
-          onChange={handleChange('nickname')}
+          onChange={handleChange}
         />
         {!formData.nickname && showErrors && (
           <p className={styles.errorMsg}>*닉네임을 입력해 주세요</p>
@@ -98,9 +97,10 @@ export const CreateStudy = () => {
         <input
           type="text"
           className={styles.input}
+          name="title"
           placeholder="스터디 이름을 입력해 주세요"
           value={formData.title}
-          onChange={handleChange('title')}
+          onChange={handleChange}
         />
         {!formData.title && showErrors && (
           <p className={styles.errorMsg}>*스터디 이름을 입력해 주세요</p>
@@ -112,7 +112,8 @@ export const CreateStudy = () => {
           className={`${styles.input} ${styles.descriptionInput}`}
           placeholder="소개 멘트를 작성해 주세요"
           value={formData.description}
-          onChange={handleChange('description')}
+          name="description"
+          onChange={handleChange}
         />
         {!formData.description && showErrors && (
           <p className={styles.errorMsg}>*소개 멘트를 작성해 주세요</p>
@@ -151,68 +152,75 @@ export const CreateStudy = () => {
           )}
         </div>
       </div>
-      <div className={styles.inputSection}>
-        <p className={styles.label}>비밀번호</p>
-        <div className={styles.passwordContainer}>
-          <input
-            type={showPassword ? 'text' : 'password'}
-            className={styles.input}
-            placeholder="비밀번호를 입력해 주세요"
-            value={formData.password}
-            onChange={handleChange('password')}
-          />
-          <button
-            type="button"
-            className={styles.visibilityButton}
-            onClick={() => setShowPassword(!showPassword)}
-            tabIndex={-1}
-          >
-            <img
-              src={showPassword ? visibility_on : visibility_off}
-              alt="비밀번호 표시"
-            />
-          </button>
-        </div>
-        {!formData.password && showErrors && (
-          <p className={styles.errorMsg}>*비밀번호를 입력해 주세요</p>
-        )}
-      </div>
+      {!isModify && (
+        <>
+          <div className={styles.inputSection}>
+            <p className={styles.label}>비밀번호</p>
+            <div className={styles.passwordContainer}>
+              <input
+                type={showPassword ? 'text' : 'password'}
+                className={styles.input}
+                placeholder="비밀번호를 입력해 주세요"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+              />
+              <button
+                type="button"
+                className={styles.visibilityButton}
+                onClick={() => setShowPassword(!showPassword)}
+                tabIndex={-1}
+              >
+                <img
+                  src={showPassword ? visibility_on : visibility_off}
+                  alt="비밀번호 표시"
+                />
+              </button>
+            </div>
+            {!formData.password && showErrors && (
+              <p className={styles.errorMsg}>*비밀번호를 입력해 주세요</p>
+            )}
+          </div>
 
-      <div className={styles.inputSection}>
-        <p className={styles.label}>비밀번호 확인</p>
-        <div className={styles.passwordContainer}>
-          <input
-            type={showPasswordVerify ? 'text' : 'password'}
-            className={styles.input}
-            placeholder="비밀번호를 다시 한 번 입력해 주세요"
-            value={formData.passwordVerify}
-            onChange={handleChange('passwordVerify')}
-          />
-          <button
-            type="button"
-            className={styles.visibilityButton}
-            onClick={() => setShowPasswordVerify(!showPasswordVerify)}
-            tabIndex={-1}
-          >
-            <img
-              src={showPasswordVerify ? visibility_on : visibility_off}
-              alt="비밀번호 표시"
-            />
-          </button>
-        </div>
-        {!formData.passwordVerify && showErrors && (
-          <p className={styles.errorMsg}>
-            *비밀번호를 다시 한 번 입력해 주세요
-          </p>
-        )}
-        {showErrors &&
-          formData.passwordVerify &&
-          formData.password !== formData.passwordVerify && (
-            <p className={styles.errorMsg}>*비밀번호가 일치하지 않습니다</p>
-          )}
-      </div>
+          <div className={styles.inputSection}>
+            <p className={styles.label}>비밀번호 확인</p>
+            <div className={styles.passwordContainer}>
+              <input
+                type={showPasswordVerify ? 'text' : 'password'}
+                className={styles.input}
+                placeholder="비밀번호를 다시 한 번 입력해 주세요"
+                value={formData.passwordVerify}
+                name="passwordVerify"
+                onChange={handleChange}
+              />
+              <button
+                type="button"
+                className={styles.visibilityButton}
+                onClick={() => setShowPasswordVerify(!showPasswordVerify)}
+                tabIndex={-1}
+              >
+                <img
+                  src={showPasswordVerify ? visibility_on : visibility_off}
+                  alt="비밀번호 표시"
+                />
+              </button>
+            </div>
+            {!formData.passwordVerify && showErrors && (
+              <p className={styles.errorMsg}>
+                *비밀번호를 다시 한 번 입력해 주세요
+              </p>
+            )}
+            {showErrors &&
+              formData.passwordVerify &&
+              formData.password !== formData.passwordVerify && (
+                <p className={styles.errorMsg}>*비밀번호가 일치하지 않습니다</p>
+              )}
+          </div>
+        </>
+      )}
+
       <PrimaryButton className={styles.createBtn} onClick={handleSubmit}>
-        만들기
+        {isModify ? '수정하기' : '만들기'}
       </PrimaryButton>
     </form>
   );
