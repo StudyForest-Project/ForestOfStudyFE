@@ -1,6 +1,7 @@
+import { createFocusSession } from '@/services/focusService';
 import { useEffect, useRef, useState } from 'react';
 
-export const useTimer = () => {
+export const useTimer = (studyId) => {
   const [targetTime, setTargetTime] = useState(0);
   const [activeTime, setActiveTime] = useState(0); // 초 단위
   const [isActive, setIsActive] = useState(false); // 타이머 실행중
@@ -23,19 +24,27 @@ export const useTimer = () => {
   }, [isActive, isPaused]);
 
   // 백엔드 전달 데이터
-  const saveFocusSession = () => {
+  const saveFocusSession = async () => {
     if (activeTime === 0) {
-      return;
+      return null;
     }
+
     const sessionData = {
       targetTime: targetTime,
       activeTime: activeTime,
       isPauseUsed: isPauseUsedRef.current,
     };
-    // api 연결 후 수정 예정
-    console.log('DB로 전송될 데이터:', sessionData);
 
-    isPauseUsedRef.current = false;
+    try {
+      const response = await createFocusSession(studyId, sessionData);
+
+      isPauseUsedRef.current = false;
+
+      return response.data;
+    } catch (error) {
+      console.error('저장 실패:', error);
+      throw error;
+    }
   };
 
   return {

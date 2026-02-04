@@ -51,3 +51,23 @@ export const updateRecentTime = (prevList, minutes, label) => {
     ...prevList.filter((i) => i.minutes !== minutes),
   ].slice(0, LIMITS.RECENT_TIMES_LIMIT);
 };
+
+// 분 단위를 'n시간 m분' 형식으로 변환
+export const formatActiveTime = (totalMinutes) => {
+  if (!totalMinutes || totalMinutes <= 0) return '0분';
+
+  const hours = Math.floor(totalMinutes / TIME.MINUTES_IN_HOUR);
+  const minutes = totalMinutes % TIME.MINUTES_IN_HOUR;
+
+  if (hours === 0) {
+    return `${minutes}분`;
+  }
+
+  return minutes === 0 ? `${hours}시간` : `${hours}시간 ${minutes}분`;
+};
+
+// 오늘 요일
+export const getTodayName = (weekDays) => {
+  const todayIndex = new Date().getDay();
+  return weekDays[todayIndex];
+};

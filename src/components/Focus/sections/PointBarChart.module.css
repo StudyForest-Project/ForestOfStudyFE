@@ -1,0 +1,55 @@
+.pointChartSvg {
+  display: block;
+  width: 70%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.chartGridLine {
+  stroke: #eeeeee;
+  stroke-dasharray: 4 4;
+  stroke-width: 1;
+}
+
+.chartAxisLabel {
+  font-size: 12px;
+  fill: #999999;
+}
+
+.chartBar {
+  transition:
+    fill 0.3s ease,
+    height 0.3s ease,
+    y 0.3s ease;
+  fill: #99c08e;
+}
+
+.chartBarZero {
+  fill: #f5f5f5;
+}
+
+.chartBarToday {
+  fill: #578246;
+}
+
+.barPointLabel {
+  font-size: 14px;
+  fill: #333333;
+}
+
+.barPointLabelToday {
+  font-size: 14px;
+  font-weight: bold;
+  fill: #578246;
+}
+
+.dayLabel {
+  font-size: 12px;
+  fill: #666666;
+}
+
+.dayLabelToday {
+  font-size: 12px;
+  font-weight: bold;
+  fill: #333333;
+}
