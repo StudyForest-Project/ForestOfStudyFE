@@ -8,6 +8,23 @@
   cursor: pointer;
 }
 
+.hasImage {
+  background-size: cover;
+  background-position: center;
+}
+
+.hasImage .title,
+.hasImage .points,
+.hasImage .days,
+.hasImage .description {
+  color: #fff;
+}
+
+.hasImage .points {
+  background: rgba(0, 0, 0, 0.3);
+  border: none;
+}
+
 .info {
   padding: 30px;
   display: flex;
@@ -22,15 +39,23 @@
   margin-bottom: 10px;
 }
 
+@media (max-width: 744px) {
+  .header {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+
 .title {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   color: #333;
   line-height: 1.3;
   flex: 1;
   margin: 0;
-  -webkit-line-clamp: 1; 
-  line-clamp: 1; 
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
   display: -webkit-box;
@@ -70,7 +95,7 @@
   line-height: 24px;
   flex: 1;
   margin: 0;
-  -webkit-line-clamp: 3; 
+  -webkit-line-clamp: 3;
   line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
