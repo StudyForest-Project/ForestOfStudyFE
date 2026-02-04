@@ -6,14 +6,14 @@
 }
 
 .chartGridLine {
-  stroke: #eeeeee;
+  stroke: var(--gray-04);
   stroke-dasharray: 4 4;
   stroke-width: 1;
 }
 
 .chartAxisLabel {
   font-size: 12px;
-  fill: #999999;
+  fill: var(--gray-02);
 }
 
 .chartBar {
@@ -30,37 +30,37 @@
 }
 
 .chartBarToday {
-  fill: #578246;
+  fill: var(--green-01);
   opacity: 0.6;
 }
 
 .dayLabel {
   font-size: 12px;
-  fill: #666666;
+  fill: var(--gray-02);
 }
 
 .dayLabelToday {
   font-size: 12px;
   font-weight: bold;
-  fill: #333333;
+  fill: var(--gray-01);
 }
 
 .focusLine {
   fill: none;
-  stroke: #578246;
+  stroke: var(--green-01);
   stroke-width: 3;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
 .focusDot {
-  fill: #578246;
+  fill: var(--green-01);
   stroke: #ffffff;
   stroke-width: 0;
 }
 
 .focusDotToday {
-  fill: #99c08e;
+  fill: var(--green-02);
   stroke: #ffffff;
   stroke-width: 2;
 }
@@ -68,5 +68,5 @@
 .timeLabel {
   font-size: 11px;
   font-weight: bold;
-  fill: #333333;
+  fill: var(--gray-01);
 }

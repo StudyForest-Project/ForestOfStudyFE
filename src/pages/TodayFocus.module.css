@@ -7,7 +7,7 @@
 .studyTitle {
   font-size: 32px;
   font-weight: 800;
-  color: #414141;
+  color: var(--gray-01);
 }
 
 .nav {
@@ -29,7 +29,7 @@
 
 .tabItem {
   text-decoration: none;
-  color: #6b7280;
+  color: var(--gray-02);
   padding: 10px 15px;
   font-size: 16px;
   transition: all 0.2s ease;
@@ -37,7 +37,7 @@
 }
 
 .activeTabItem {
-  color: #578246;
+  color: var(--green-01);
   font-weight: 700;
-  border-bottom: 2px solid #578246;
+  border-bottom: 2px solid var(--green-01);
 }

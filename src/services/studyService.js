@@ -24,4 +24,23 @@ const addEmojis = async (studyId, emojis) => {
   return res.data;
 };
 
-export { getStudyDetail, deleteStudy, getEmojis, addEmojis };
+// POST /studies
+const createStudy = async (studyData) => {
+  const res = await publicApi.post('/studies', studyData);
+  return res.data;
+};
+
+//PATCH /studies/:studyId
+const patchStudy = async (studyId, studyData) => {
+  const res = await api.patch(`/studies/${studyId}`, studyData);
+  return res.data;
+};
+
+export {
+  getStudyDetail,
+  deleteStudy,
+  getEmojis,
+  addEmojis,
+  createStudy,
+  patchStudy,
+};

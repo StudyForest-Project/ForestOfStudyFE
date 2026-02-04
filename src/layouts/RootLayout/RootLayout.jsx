@@ -11,7 +11,7 @@ export const RootLayout = () => {
         <Link to="/">
           <img className={styles.logo} src={logo} alt="공부의 숲 로고" />
         </Link>
-        <Link to="/new">
+        <Link to="/studyCreate">
           <PrimaryButton>스터디 만들기</PrimaryButton>
         </Link>
       </header>

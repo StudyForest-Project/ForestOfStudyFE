@@ -17,7 +17,7 @@
   background-color: white;
   font-size: 16px;
   font-weight: 500;
-  color: #414141;
+  color: var(--gray-01);
 }
 
 .timerContainer {
@@ -34,7 +34,7 @@
   justify-content: center;
   font-size: 120px;
   font-weight: 800;
-  color: #414141;
+  color: var(--gray-01);
 }
 
 .sign {
@@ -65,7 +65,7 @@
 .fixedSeconds {
   font-size: 50px;
   font-weight: 700;
-  color: #818181;
+  color: var(--gray-02);
   margin-left: 8px;
   display: inline-block;
   font-variant-numeric: tabular-nums;
@@ -78,7 +78,7 @@
   font-family: inherit;
   font-size: inherit;
   font-weight: inherit;
-  color: #414141;
+  color: var(--gray-01);
   text-align: center;
   width: 2ch;
   outline: none;
@@ -100,11 +100,11 @@
 /* 1분 미만 */
 .warning .displayTime,
 .warning .displayTime * {
-  color: #f50e0e;
+  color: var(--red-02);
 }
 
 /* 초과 시간 */
 .minus .displayTime,
 .minus .displayTime * {
-  color: #818181;
+  color: var(--gray-02);
 }

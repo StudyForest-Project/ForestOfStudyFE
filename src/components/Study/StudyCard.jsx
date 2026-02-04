@@ -2,6 +2,8 @@ import styles from './StudyCard.module.css';
 import ic_point from '../../assets/icons/ic_point.svg';
 import { useNavigate } from 'react-router';
 
+const TITLE_COLORS = ['#578246', '#C18E1B'];
+
 export const RECENT_KEY = 'recentStudies';
 const MAX = 3;
 
@@ -10,11 +12,18 @@ export const StudyCard = ({ item }) => {
 
   const backgroundImage = item.backgroundImage;
   const MS_PER_DAY = 1000 * 60 * 60 * 24;
-  const bgStyle = {
-    background: backgroundImage.startsWith('#')
-      ? backgroundImage
-      : `url(${backgroundImage})`,
-  };
+  const isColorBg = backgroundImage.startsWith('#');
+
+  const titleColor = isColorBg
+    ? TITLE_COLORS[
+        [...item.id].reduce((sum, char) => sum + char.charCodeAt(0), 0) %
+          TITLE_COLORS.length
+      ]
+    : undefined;
+
+  const bgStyle = isColorBg
+    ? { background: backgroundImage }
+    : { backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${backgroundImage})` };
 
   const getDays = (createdAt) =>
     `${Math.floor((new Date() - new Date(createdAt)) / MS_PER_DAY)}일째 진행 중`;
@@ -42,12 +51,19 @@ export const StudyCard = ({ item }) => {
   };
 
   return (
-    <div className={styles.studyCard} style={bgStyle} onClick={handleCardClick}>
+    <div
+      className={`${styles.studyCard} ${!backgroundImage.startsWith('#') ? styles.hasImage : ''}`}
+      style={bgStyle}
+      onClick={handleCardClick}
+    >
       {item?.images?.[0] && <img src={item.images[0]} alt={item?.title} />}
       <div className={styles.info}>
         <div className={styles.header}>
           <p className={styles.title}>
-            {item.nickname}의 {item.title}
+            <span style={titleColor ? { color: titleColor } : undefined}>
+              {item.nickname}
+            </span>
+            의 {item.title}
           </p>
           <span className={styles.points}>
             <img src={ic_point} alt="포인트" className={styles.pointIcon} />
