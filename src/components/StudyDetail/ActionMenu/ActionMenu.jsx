@@ -5,13 +5,15 @@ import { shareStudy } from '@/utils/shareStudy';
 import { deleteStudy } from '@/services/studyService';
 import { showSuccessToast } from '@/utils/toast';
 import styles from './ActionMenu.module.css';
+import useCrateStudyStore from '@/stores/useStudyFormStore';
 
 export const ActionMenu = ({ studyId, study }) => {
   const navigate = useNavigate();
+  const setFormData = useCrateStudyStore((s) => s.setFormData);
   const [currentAction, setCurrentAction] = useState(null);
 
   if (!study) return null;
-
+  console.log(study);
   const handleActionClick = async (type) => {
     /* 공유하기는 비밀번호 검증 없이 바로 실행 */
     if (type === 'share') {
@@ -34,7 +36,16 @@ export const ActionMenu = ({ studyId, study }) => {
   /* 비밀번호 검증 성공 후 실행되는 액션 처러 */
   const handleVerifiedAction = async () => {
     if (currentAction === 'edit') {
-      navigate(`/`); // 수정 페이지로 이동
+      const studyData = {
+        nickname: study.nickname,
+        title: study.title,
+        description: study.description,
+        backgroundImage: study.backgroundImage,
+      };
+
+      setFormData(studyData);
+      sessionStorage.setItem(`studyForm:${studyId}`, JSON.stringify(studyData));
+      navigate(`/${studyId}/studyModify`); // 수정 페이지로 이동
     }
 
     if (currentAction === 'delete') {

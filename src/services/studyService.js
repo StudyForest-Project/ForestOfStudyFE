@@ -30,4 +30,17 @@ const createStudy = async (studyData) => {
   return res.data;
 };
 
-export { getStudyDetail, deleteStudy, getEmojis, addEmojis, createStudy };
+//PATCH /studies/:studyId
+const patchStudy = async (studyId, studyData) => {
+  const res = await api.patch(`/studies/${studyId}`, studyData);
+  return res.data;
+};
+
+export {
+  getStudyDetail,
+  deleteStudy,
+  getEmojis,
+  addEmojis,
+  createStudy,
+  patchStudy,
+};
