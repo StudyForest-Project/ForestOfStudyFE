@@ -1,0 +1,43 @@
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.studyTitle {
+  font-size: 32px;
+  font-weight: 800;
+  color: #414141;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.nav span {
+  white-space: nowrap;
+}
+
+.tabNav {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+  justify-content: flex-end;
+}
+
+.tabItem {
+  text-decoration: none;
+  color: #6b7280;
+  padding: 10px 15px;
+  font-size: 16px;
+  transition: all 0.2s ease;
+  border-bottom: 2px solid transparent;
+}
+
+.activeTabItem {
+  color: #578246;
+  font-weight: 700;
+  border-bottom: 2px solid #578246;
+}

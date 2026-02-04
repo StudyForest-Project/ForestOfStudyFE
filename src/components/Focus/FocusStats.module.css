@@ -1,0 +1,74 @@
+.statsContainer {
+  border: 1px solid #dddddd;
+  border-radius: 50px;
+  padding: 30px 20px;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 100%;
+  color: #414141;
+}
+
+.summary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.summaryContent {
+  border: 1px solid #dddddd;
+  border-radius: 50px;
+  padding: 5px 15px;
+  font-size: 16px;
+}
+
+.rateDisplay {
+  border-top: 1px solid #dddddd;
+  padding: 90px 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.donutTitle {
+  font-size: 24px;
+  font-weight: 700;
+  color: #414141;
+}
+
+.donutChart {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  gap: 10px;
+}
+
+.focusChart {
+  border-top: 1px solid #dddddd;
+  padding-top: 90px;
+  padding-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.chartTitle {
+  font-size: 24px;
+  font-weight: 700;
+  color: #414141;
+  margin-left: 120px;
+}
+
+@media (max-width: 375px) {
+}

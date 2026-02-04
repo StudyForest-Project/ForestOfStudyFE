@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router';
+import { Routes, Route, Navigate } from 'react-router';
 import { StudyLayout } from './layouts/StudyLayout';
 import { RootLayout } from './layouts/RootLayout';
 import { GlobalToastProvider } from './providers/GlobalToastContainer';
@@ -11,6 +11,10 @@ import {
   TodayFocusPage,
   NotFoundPage,
 } from './pages';
+
+import Timer from './components/Focus/Timer';
+import PointStats from './components/Focus/PointStats';
+import FocusStats from './components/Focus/FocusStats';
 
 function App() {
   return (
@@ -25,7 +29,12 @@ function App() {
         <Route path="/studies/:studyId" element={<StudyLayout />}>
           <Route index element={<StudyPage />} />
           <Route path="habit" element={<TodayHabitPage />} />
-          <Route path="focus" element={<TodayFocusPage />} />
+          <Route path="focus" element={<TodayFocusPage />}>
+            <Route index element={<Navigate to="timer" replace />} />
+            <Route path="timer" element={<Timer />} />
+            <Route path="focus-stats" element={<FocusStats />} />
+            <Route path="point-stats" element={<PointStats />} />
+          </Route>
         </Route>
 
         <Route path="*" element={<NotFoundPage />} />

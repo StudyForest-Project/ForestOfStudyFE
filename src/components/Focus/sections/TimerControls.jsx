@@ -4,6 +4,7 @@ import { FaRegCircleStop, FaRegCirclePause } from 'react-icons/fa6';
 import { IoPlay } from 'react-icons/io5';
 import { MdOutlineReplay } from 'react-icons/md';
 import styles from './TimerControls.module.css';
+import { showSuccessToast, showWarningToast } from '@/utils/toast';
 
 export default function TimerControls({
   isActive,
@@ -42,6 +43,11 @@ export default function TimerControls({
 
     if (targetTotalMinutes === 0) return;
 
+    // 30분 미만 경고
+    if (targetTotalMinutes < 30) {
+      showWarningToast('30분 미만은 포인트가 적립되지 않습니다');
+    }
+
     setTargetTime(targetTotalMinutes);
     setActiveTime(0);
     isPauseUsedRef.current = false;
@@ -58,6 +64,10 @@ export default function TimerControls({
   const handlePause = () => {
     setIsPaused(!isPaused);
 
+    if (!isPaused) {
+      showWarningToast('집중이 중단되었습니다');
+    }
+
     if (isPaused || isPauseUsedRef.current) {
       return;
     }
@@ -72,19 +82,35 @@ export default function TimerControls({
   };
 
   // 종료 버튼 -> 멈춘 상태 유지
-  const handleStop = () => {
+  const handleStop = async () => {
     setIsActive(false);
     setIsPaused(false);
 
-    saveFocusSession();
+    const result = await saveFocusSession();
+
+    if (result && result.focusSession && result.focusSession.earnedPoints > 0) {
+      showSuccessToast(
+        result.focusSession.earnedPoints + '포인트가 적립되었습니다',
+      );
+    }
   };
 
   // 리셋 버튼
-  const handleReset = () => {
+  const handleReset = async () => {
     if (isActive && !isPaused) return;
 
     if (isPaused) {
-      saveFocusSession();
+      const result = await saveFocusSession();
+
+      if (
+        result &&
+        result.focusSession &&
+        result.focusSession.earnedPoints > 0
+      ) {
+        showSuccessToast(
+          result.focusSession.earnedPoints + '포인트가 적립되었습니다',
+        );
+      }
     }
 
     setInputHours('');

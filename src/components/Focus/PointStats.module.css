@@ -1,0 +1,47 @@
+.statsContainer {
+  border: 1px solid #dddddd;
+  border-radius: 50px;
+  padding: 30px 20px;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 100%;
+  color: #414141;
+}
+
+.summary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.summaryContent {
+  border: 1px solid #dddddd;
+  border-radius: 50px;
+  padding: 5px 15px;
+  font-size: 16px;
+}
+
+.pointChart {
+  border-top: 1px solid #dddddd;
+  padding-top: 80px;
+  padding-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.chartTitle {
+  font-size: 24px;
+  font-weight: 700;
+  color: #414141;
+  margin-left: 190px;
+}

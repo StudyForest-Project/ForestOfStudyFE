@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { getFocusSession } from '@/seed/focusSession';
+import { useOutletContext } from 'react-router';
 import { TIME, LIMITS } from '@/utils/timerConstants';
 import {
   validateRange,
@@ -15,6 +15,8 @@ import TimerControls from '@/components/Focus/sections/TimerControls';
 import styles from './Timer.module.css';
 
 export default function Timer() {
+  const { studyId, initialTimeList, onSaveSuccess } = useOutletContext();
+
   const [isInputMode, setInputMode] = useState(null); // 타이머 입력 모드 : null, "hour", "minute"
   const [inputHours, setInputHours] = useState(''); // 시간 입력
   const [inputMinutes, setInputMinutes] = useState(''); // 분 입력
@@ -23,11 +25,7 @@ export default function Timer() {
   const minuteInputRef = useRef(null);
   const inputContainerRef = useRef(null);
 
-  const TEST_ID = '71HFE865V215DE1CTEWH0AVNH9';
-  const initialFocusData = getFocusSession(TEST_ID);
-  const [timeList, setTimeList] = useState(
-    initialFocusData?.recentTargetTimes || [],
-  ); // DB 연동
+  const [timeList, setTimeList] = useState(initialTimeList);
 
   const {
     targetTime,
@@ -40,7 +38,7 @@ export default function Timer() {
     setIsPaused,
     isPauseUsedRef,
     saveFocusSession,
-  } = useTimer();
+  } = useTimer(studyId);
 
   // 입력값 변경 감지
   const handleInputChange = (event) => {
@@ -102,6 +100,19 @@ export default function Timer() {
   const formattedTime = formatDisplayTime(timeUnits);
   const timeSign = leftTimeSeconds < 0 ? '-' : '';
 
+  // 데이터 저장
+  const handleSaveFocus = async () => {
+    try {
+      const result = await saveFocusSession();
+
+      if (result && result.totalPoint !== undefined) {
+        onSaveSuccess(result.totalPoint);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className={styles.focusContainer}>
       <h3 className={styles.subTitle}>오늘의 집중</h3>
@@ -137,7 +148,7 @@ export default function Timer() {
         updateTimeList={(minutes, label) =>
           setTimeList((prev) => updateTimeList(prev, minutes, label))
         } //
-        saveFocusSession={saveFocusSession}
+        saveFocusSession={handleSaveFocus}
         updateTimerValues={updateTimerValues}
       />
     </div>
