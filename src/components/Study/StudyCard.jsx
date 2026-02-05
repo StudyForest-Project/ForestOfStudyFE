@@ -1,6 +1,25 @@
 import styles from './StudyCard.module.css';
 import ic_point from '../../assets/icons/ic_point.svg';
 import { useNavigate } from 'react-router';
+import bgImg1 from '@/assets/img/bg_img_1.jpg';
+import bgImg2 from '@/assets/img/bg_img_2.jpg';
+import bgImg3 from '@/assets/img/bg_img_3.jpg';
+import bgImg4 from '@/assets/img/bg_img_4.jpg';
+
+const BG_IMAGE_MAP = {
+  bg_img_1: bgImg1,
+  bg_img_2: bgImg2,
+  bg_img_3: bgImg3,
+  bg_img_4: bgImg4,
+};
+
+const getBackgroundImage = (path) => {
+  if (!path || path.startsWith('#')) return path;
+  for (const [key, value] of Object.entries(BG_IMAGE_MAP)) {
+    if (path.includes(key)) return value;
+  }
+  return path;
+};
 
 const NICKNAME_COLOR_MAP = {
   '#E1EDDE': '#578246',
@@ -15,7 +34,7 @@ const MAX = 3;
 export const StudyCard = ({ item }) => {
   const navigate = useNavigate();
 
-  const backgroundImage = item.backgroundImage;
+  const backgroundImage = getBackgroundImage(item.backgroundImage);
   const MS_PER_DAY = 1000 * 60 * 60 * 24;
   const isColorBg = backgroundImage.startsWith('#');
 

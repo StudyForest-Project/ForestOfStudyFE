@@ -118,7 +118,20 @@ export const CreateStudy = () => {
   const selectedBgIndex = useMemo(() => {
     const bgValue = formData.backgroundImage;
     if (!bgValue) return null;
-    const idx = backgrounds.findIndex((bg) => bg.value === bgValue);
+    // 색상인 경우 직접 비교
+    if (bgValue.startsWith('#')) {
+      return backgrounds.findIndex((bg) => bg.value === bgValue);
+    }
+    // 이미지인 경우 파일명으로 매칭
+    const idx = backgrounds.findIndex((bg) => {
+      if (bg.type === 'color') return false;
+      for (let i = 1; i <= 4; i++) {
+        if (bgValue.includes(`bg_img_${i}`) && bg.value.includes(`bg_img_${i}`)) {
+          return true;
+        }
+      }
+      return false;
+    });
     return idx >= 0 ? idx : null;
   }, [formData.backgroundImage]);
 
