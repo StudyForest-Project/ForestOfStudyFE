@@ -84,7 +84,6 @@ export const CreateStudy = () => {
           logout(studyId);
         }
       }, 100);
-      logout(studyId);
     };
   }, [isModify, studyId]);
 

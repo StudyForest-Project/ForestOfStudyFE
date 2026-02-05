@@ -8,7 +8,6 @@
 }
 
 .title {
-  margin: 0;
   color: #414141;
   font-size: 32px;
   font-weight: 800;
@@ -24,9 +23,9 @@
   margin-left: auto;
 }
 
-.currentTime {
+/* .currentTime {
   margin-top: 16px;
-}
+} */
 
 /* 스터디 이름 + 페이지 이동 버튼 줄바꿈 */
 @media (max-width: 540px) {
