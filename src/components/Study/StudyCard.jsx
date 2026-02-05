@@ -23,30 +23,38 @@ export const StudyCard = ({ item }) => {
 
   const bgStyle = isColorBg
     ? { background: backgroundImage }
-    : { backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${backgroundImage})` };
+    : {
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${backgroundImage})`,
+      };
 
   const getDays = (createdAt) =>
     `${Math.floor((new Date() - new Date(createdAt)) / MS_PER_DAY)}일째 진행 중`;
 
   const handleCardClick = () => {
-    const stored = JSON.parse(localStorage.getItem(RECENT_KEY) || '[]');
-    const filtered = stored.filter((s) => s.id !== item.id);
+    // const stored = JSON.parse(localStorage.getItem(RECENT_KEY) || '[]');
+    // const filtered = stored.filter((s) => s.id !== item.id);
 
-    const recentItem = [
-      {
-        id: item.id,
-        nickname: item.nickname,
-        title: item.title,
-        totalPoint: item.totalPoint,
-        createdAt: item.createdAt,
-        description: item.description,
-        emojis: item.emojis,
-        backgroundImage: item.backgroundImage,
-      },
-      ...filtered,
-    ].slice(0, MAX);
+    // const recentItem = [
+    //   {
+    //     id: item.id,
+    //     nickname: item.nickname,
+    //     title: item.title,
+    //     totalPoint: item.totalPoint,
+    //     createdAt: item.createdAt,
+    //     description: item.description,
+    //     emojis: item.emojis,
+    //     backgroundImage: item.backgroundImage,
+    //   },
+    //   ...filtered,
+    // ].slice(0, MAX);
 
-    localStorage.setItem(RECENT_KEY, JSON.stringify(recentItem));
+    // localStorage.setItem(RECENT_KEY, JSON.stringify(recentItem));
+
+    // 새 코드 (ID만 저장 - {"ids": [...]} 형식)
+    const stored = JSON.parse(localStorage.getItem(RECENT_KEY) || '{"ids": []}');
+    const filteredIds = (stored.ids || []).filter((id) => id !== item.id);
+    const recentIds = { ids: [item.id, ...filteredIds].slice(0, MAX) };
+    localStorage.setItem(RECENT_KEY, JSON.stringify(recentIds));
     navigate(`/studies/${item.id}`);
   };
 
