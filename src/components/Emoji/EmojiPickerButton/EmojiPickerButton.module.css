@@ -4,6 +4,7 @@
 
 .addButton {
   border-radius: 50px;
+
   border: 1px solid rgba(0, 0, 0, 0.1);
   background: rgba(255, 255, 255, 0.3);
   padding: 6px 8px;
@@ -19,4 +20,13 @@
 
 .emojiPicker {
   position: absolute;
+  margin-top: 12px;
+}
+
+.emojiPicker ul {
+  display: revert;
+  flex-direction: revert;
+  justify-content: revert;
+  align-items: revert;
+  gap: revert;
 }

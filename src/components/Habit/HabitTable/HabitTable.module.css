@@ -1,3 +1,7 @@
+.wrapper {
+  width: 100%;
+}
+
 /* 요일 및 습관 데이터 행 */
 .row {
   display: grid;
@@ -25,9 +29,20 @@
 
 /* Mobile */
 @media (max-width: 375px) {
+  .wrapper {
+    overflow-x: auto;
+    -ms-overflow-style: none; /* IE, Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .wrapper::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+  }
+
   .row {
     grid-template-columns: 90px repeat(7, 36px);
     column-gap: 14px;
+    min-width: max-content;
   }
 
   .habitTitle,

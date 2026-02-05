@@ -11,7 +11,6 @@ import visibility_on from '@/assets/icons/ic_visibility_on.svg';
 import { createStudy, patchStudy } from '@/services';
 import { useLocation, useNavigate, useParams } from 'react-router';
 import useCrateStudyStore from '@/stores/useStudyFormStore';
-import { useAuthStore } from '@/stores/authStore';
 
 const backgrounds = [
   { type: 'color', value: '#E1EDDE' },
@@ -34,7 +33,7 @@ export const CreateStudy = () => {
   const setField = useCrateStudyStore((s) => s.setField);
   const setFormData = useCrateStudyStore((s) => s.setFormData);
   const resetFormData = useCrateStudyStore((s) => s.resetFormData);
-  const verifiedStudyId = useAuthStore((s) => s.verifiedStudyId);
+
   const nav = useNavigate();
 
   const handleChange = (e) => {
@@ -70,7 +69,7 @@ export const CreateStudy = () => {
     } catch {
       sessionStorage.removeItem(key);
     }
-  }, [isModify, studyId, setFormData, resetFormData, nav, verifiedStudyId]);
+  }, [isModify, studyId, setFormData, resetFormData, nav]);
 
   const selectedBgIndex = useMemo(() => {
     const bgValue = formData.backgroundImage;
