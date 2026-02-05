@@ -2,7 +2,12 @@ import styles from './StudyCard.module.css';
 import ic_point from '../../assets/icons/ic_point.svg';
 import { useNavigate } from 'react-router';
 
-const TITLE_COLORS = ['#578246', '#C18E1B'];
+const NICKNAME_COLOR_MAP = {
+  '#E1EDDE': '#578246',
+  '#FFF1CC': '#C18E1B',
+  '#FDE0E9': '#BC3C6A',
+  '#E0F1F5': '#418099',
+};
 
 export const RECENT_KEY = 'recentStudies';
 const MAX = 3;
@@ -15,10 +20,7 @@ export const StudyCard = ({ item }) => {
   const isColorBg = backgroundImage.startsWith('#');
 
   const titleColor = isColorBg
-    ? TITLE_COLORS[
-        [...item.id].reduce((sum, char) => sum + char.charCodeAt(0), 0) %
-          TITLE_COLORS.length
-      ]
+    ? NICKNAME_COLOR_MAP[backgroundImage]
     : undefined;
 
   const bgStyle = isColorBg

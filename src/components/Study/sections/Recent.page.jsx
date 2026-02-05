@@ -13,6 +13,10 @@ export const RecentPage = () => {
       if (stored.ids && stored.ids.length > 0) {
         const res = await getRecentList(stored);
         setRecent(res.studies);
+
+        // 서버에서 받은 실제 존재하는 스터디 ID로 로컬스토리지 동기화
+        const validIds = res.studies.map((study) => study.id);
+        localStorage.setItem(RECENT_KEY, JSON.stringify({ ids: validIds }));
       }
     };
     fetchRecent();
