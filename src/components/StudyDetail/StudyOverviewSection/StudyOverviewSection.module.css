@@ -16,10 +16,6 @@
   gap: 16px;
 }
 
-.nav span {
-  white-space: nowrap;
-}
-
 .introSection {
   font-size: 18px;
   display: flex;
@@ -41,7 +37,7 @@
 }
 
 .totalPoint {
-  margin-top: 24px 0 40px;
+  margin: 24px 0 40px;
 }
 
 /* Mobile */
@@ -57,12 +53,7 @@
 
   .nav {
     gap: 8px;
-  }
-  
-  .nav button {
-    width: 120px;
-    height: 40px;
-    padding: 10px 12px;
+    margin-bottom: 16px;
   }
 
   .introTitle {
@@ -71,5 +62,9 @@
 
   .introText {
     font-size: 14px;
+  }
+
+  .totalPoint {
+    margin-bottom: 24px;
   }
 }
