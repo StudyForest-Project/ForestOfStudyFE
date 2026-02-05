@@ -33,7 +33,6 @@ export default function PointStats() {
       </div>
 
       <div className={styles.pointChart}>
-        <span className={styles.chartTitle}>이번 주 기록</span>
         <PointBarChart data={data.weeklyPointChart} />
       </div>
     </div>

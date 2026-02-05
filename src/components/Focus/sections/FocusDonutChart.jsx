@@ -1,7 +1,7 @@
 import { DONUT } from '@/utils/timerConstants';
 import styles from './FocusDonutChart.module.css';
 
-export default function FocusDonutChart({ total = 0, value = 0 }) {
+export default function FocusDonutChart({ title = '', total = 0, value = 0 }) {
   const center = DONUT.SIZE / 2; // 원 중심 좌표
   const circumference = 2 * Math.PI * DONUT.RADIUS; // 원 둘레
 
@@ -12,6 +12,8 @@ export default function FocusDonutChart({ total = 0, value = 0 }) {
 
   return (
     <div className={styles.donutContainer}>
+      <span className={styles.chartTitle}>{title}</span>
+
       <svg
         className={styles.donutSvg}
         width={DONUT.SIZE}

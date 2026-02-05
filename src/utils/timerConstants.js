@@ -2,7 +2,6 @@ export const TIME = {
   MINUTES_IN_HOUR: 60,
   SECONDS_IN_MINUTE: 60,
   SECONDS_IN_HOUR: 3600,
-  TIMER_INTERVAL: 1000,
 };
 
 export const LIMITS = {
@@ -29,16 +28,16 @@ export const CHART = {
 
 export const POINT = {
   MIN_MAX_VALUE: 10, // 최소 최대값 -> 모든 데이터 0이여도 차트 생성될 수 있도록
-  CEILING_UNIT: 10, // 10단위 올림 기준
+  CEILING_UNIT: 10, // 10단위 올림
 };
 
 export const FOCUS = {
   MIN_MAX_VALUE: 60,
-  CEILING_UNIT: 60, // 60단위 올림 기준
+  CEILING_UNIT: 60, // 60단위 올림 
 
   DOT_RADIUS: 4, // 선 그래프 점 크기
   DOT_HIGHLIGHT_SIZE: 1.5, // 오늘 하이라이트용
-  DOT_LABEL_GAP: 10,
+  DOT_LABEL_GAP: 12,
 };
 
 export const DONUT = {

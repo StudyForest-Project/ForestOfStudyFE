@@ -1,7 +1,18 @@
 .donutContainer {
   width: 60%;
   max-width: 400px;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.chartTitle {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--gray-01);
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 .donutSvg {
@@ -31,4 +42,16 @@
 .subText {
   font-size: 12px;
   fill: var(--gray-02);
+}
+
+@media (max-width: 744px) {
+  .chartTitle {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 375px) {
+  .chartTitle {
+    font-size: 12px;
+  }
 }

@@ -49,15 +49,15 @@ export default function FocusStats() {
 
       <div className={styles.rateDisplay}>
         <div className={styles.donutChart}>
-          <span className={styles.donutTitle}>목표 달성률</span>
           <FocusDonutChart
+            title="목표 달성률"
             total={summary.sessionCount}
             value={summary.targetReachedCount}
           />
         </div>
         <div className={styles.donutChart}>
-          <span className={styles.donutTitle}>집중 성공률</span>
           <FocusDonutChart
+            title="집중 성공률"
             total={summary.sessionCount}
             value={summary.perfectFocusCount}
           />
@@ -65,7 +65,6 @@ export default function FocusStats() {
       </div>
 
       <div className={styles.focusChart}>
-        <span className={styles.chartTitle}>이번 주 기록</span>
         <FocusComboChart data={weekly.weeklyFocusChart} />
       </div>
     </div>

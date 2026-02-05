@@ -45,7 +45,7 @@ export const showTargetTime = (inputHours, inputMinutes) => {
 };
 
 // 설정 시간 리스트 업데이트
-export const updateRecentTime = (prevList, minutes, label) => {
+export const updateTimeList = (prevList, minutes, label) => {
   return [
     { minutes, label },
     ...prevList.filter((i) => i.minutes !== minutes),
