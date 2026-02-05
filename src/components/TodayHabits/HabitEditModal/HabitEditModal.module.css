@@ -20,8 +20,8 @@
 
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 10px;
+  align-items: stretch;
+  gap: 24px;
 }
 
 .title {
@@ -29,20 +29,20 @@
   color: var(--black-black_414141, #414141);
   font-size: 24px;
   font-weight: 800;
+  align-self: center;
 }
 
 /* 습관 리스트 */
 .list {
+  width: 400px;
+  margin: 0 auto;
   list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
 }
 
-/* 각 리스트 아이템 기준 컨테이너 */
+/* 습관 입력 인풋 + 습관 삭제 버튼 */
 .listItem {
-  width: 400px;
-  height: 54px;
+  display: flex;
+  align-items: center;
 }
 
 /* 습관 입력 인풋 */
@@ -59,26 +59,22 @@
   font-size: 16px;
   font-weight: 700;
   text-decoration-line: underline;
-
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
 }
 
 /* 습관 삭제 버튼 */
 .deleteButton {
   border: none;
   background: none;
+
   width: 48px;
   height: 48px;
+  padding-left: 8px;
   cursor: pointer;
-
-  position: absolute;
-  right: -48px;
 }
 
 /* 습관 추가 버튼 */
 .addButton {
+  margin: 0 auto;
   width: 400px;
   height: 54px;
 
@@ -97,10 +93,42 @@
   justify-content: center;
   align-items: center;
   gap: 24px;
-  margin-top: 24px;
 }
 
 .cancelButton {
   border-radius: 16px;
   background: #ddd;
+}
+
+@media (max-width: 375px) {
+  .modal {
+    width: 344px;
+    padding: 16px 16px 24px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .list {
+    width: 312px;
+    padding: 0;
+    margin: 0;
+    align-self: flex-start;
+  }
+
+  .habitInput {
+    width: 256px;
+    font-size: 14px;
+  }
+
+  .addButton {
+    width: 312px;
+  }
+
+  .cancelButton,
+  .submitButton {
+    width: 140px;
+    height: 58px;
+  }
 }
