@@ -10,7 +10,7 @@ export const HabitTable = ({ habitWeek }) => {
   const { rows } = habitWeek;
 
   return (
-    <>
+    <div className={styles.wrapper}>
       <div className={styles.row}>
         {DAYS.map((day, index) => (
           <span
@@ -42,6 +42,6 @@ export const HabitTable = ({ habitWeek }) => {
           </div>
         );
       })}
-    </>
+    </div>
   );
 };

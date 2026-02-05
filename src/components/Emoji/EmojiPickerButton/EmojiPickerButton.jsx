@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import EmojiPicker from 'emoji-picker-react';
 import ic_emoji_add from '@/assets/icons/ic_emoji_add.svg';
 import { addEmojis } from '@/services/studyService';
@@ -10,6 +10,8 @@ export const EmojiPickerButton = ({ studyId, onAddEmoji }) => {
   const [isOpen, setIsOpen] = useState(false);
   /* 이모지 연타를 모아두는 큐 (배치 전송용)*/
   const [emojiQueue, setEmojiQueue] = useState([]);
+  /* 외부 클릭 감지용 ref */
+  const pickerRef = useRef(null);
 
   /* 이모지 클릭 핸들러 */
   const handleEmojiClick = async (emojiObject) => {
@@ -17,7 +19,25 @@ export const EmojiPickerButton = ({ studyId, onAddEmoji }) => {
 
     onAddEmoji(emoji); // UI (즉시 화면 반영)
     setEmojiQueue((prev) => [...prev, emoji]); // 큐에 추가
+    setIsOpen(false);
   };
+
+  /* 외부 클릭 시 피커 닫기 */
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (pickerRef.current && !pickerRef.current.contains(e.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen]);
 
   /* 이모지 배치 전송 useEffect (500ms동안 추가 클릭이 없으면 서버로 전송) */
   useEffect(() => {
@@ -41,7 +61,7 @@ export const EmojiPickerButton = ({ studyId, onAddEmoji }) => {
   }, [emojiQueue, studyId]);
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} ref={pickerRef}>
       {/* 이모지 추가 버튼 */}
       <button
         type="button"
