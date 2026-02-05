@@ -30,3 +30,9 @@
   align-items: revert;
   gap: revert;
 }
+
+@media (max-width: 375px) {
+  :global(.EmojiPickerReact .epr-category-nav) {
+    display: none;
+  }
+}

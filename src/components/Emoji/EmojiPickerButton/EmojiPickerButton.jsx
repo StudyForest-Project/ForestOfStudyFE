@@ -3,6 +3,7 @@ import EmojiPicker from 'emoji-picker-react';
 import ic_emoji_add from '@/assets/icons/ic_emoji_add.svg';
 import { addEmojis } from '@/services/studyService';
 import { showWarningToast } from '@/utils/toast';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 import styles from './EmojiPickerButton.module.css';
 
 export const EmojiPickerButton = ({ studyId, onAddEmoji }) => {
@@ -12,6 +13,8 @@ export const EmojiPickerButton = ({ studyId, onAddEmoji }) => {
   const [emojiQueue, setEmojiQueue] = useState([]);
   /* 외부 클릭 감지용 ref */
   const pickerRef = useRef(null);
+  /* 이모지 피커 크기 조정용 모바일 크기 */
+  const isMobile = useMediaQuery('(max-width: 375px)');
 
   /* 이모지 클릭 핸들러 */
   const handleEmojiClick = async (emojiObject) => {
@@ -75,7 +78,11 @@ export const EmojiPickerButton = ({ studyId, onAddEmoji }) => {
       {/* emoji-picker */}
       {isOpen && (
         <div className={styles.emojiPicker}>
-          <EmojiPicker onEmojiClick={handleEmojiClick} />
+          <EmojiPicker
+            onEmojiClick={handleEmojiClick}
+            width={isMobile ? 150 : 307}
+            height={isMobile ? 300 : 392}
+          />
         </div>
       )}
     </div>
