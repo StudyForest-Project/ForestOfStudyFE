@@ -25,3 +25,10 @@
   border-radius: 20px;
   background: #ffffff;
 }
+
+@media (max-width: 375px) {
+  .logo {
+    width: 106px;
+    height: auto;
+  }
+}

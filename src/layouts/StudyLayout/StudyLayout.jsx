@@ -19,7 +19,9 @@ export const StudyLayout = () => {
         if (ok) {
           verifyStudy(studyId);
         }
-      } catch {}
+      } catch {
+        console.log('err');
+      }
     };
 
     restoreAuth();
@@ -27,9 +29,11 @@ export const StudyLayout = () => {
 
   return (
     <div className={styles.page}>
-      <Link to="/">
-        <img className={styles.logo} src={logo} alt="공부의 숲 로고" />
-      </Link>
+      <header className={styles.topBar}>
+        <Link to="/">
+          <img className={styles.logo} src={logo} alt="공부의 숲 로고" />
+        </Link>
+      </header>
 
       <main className={styles.container}>
         <Outlet />
