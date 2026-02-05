@@ -1,19 +1,36 @@
+import { getRecentList } from '@/services/studyListService';
 import { RECENT_KEY, StudyCard } from '../StudyCard';
 import styles from './StudyPage.module.css';
+import { useEffect, useState } from 'react';
 
 export const RecentPage = () => {
-  const recentData = JSON.parse(localStorage.getItem(RECENT_KEY) || '[]');
-  console.log(recentData);
+  const [recent, setRecent] = useState([]);
+  useEffect(() => {
+    const fetchRecent = async () => {
+      const stored = JSON.parse(
+        localStorage.getItem(RECENT_KEY) || '{"ids": []}',
+      );
+      if (stored.ids && stored.ids.length > 0) {
+        const res = await getRecentList(stored);
+        setRecent(res.studies);
+      }
+    };
+    fetchRecent();
+  }, []);
+
+  console.log(recent, 'zzzzz');
 
   return (
     <section className={styles.container}>
       <h1 className={styles.title}>최근 조회한 스터디</h1>
 
-      {recentData.length === 0 && <p className={styles.empty}>아직 조회한 스터디가 없어요</p>}
+      {recent.length === 0 && (
+        <p className={styles.empty}>아직 조회한 스터디가 없어요</p>
+      )}
 
-      {recentData.length !== 0 && (
+      {recent.length > 0 && (
         <div className={styles.recentList}>
-          {recentData.map((item) => (
+          {recent.map((item) => (
             <StudyCard key={item.id} item={item} />
           ))}
         </div>

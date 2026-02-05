@@ -2,7 +2,8 @@
   border: 1px solid var(--gray-gray_DDDDDD, #ddd);
   border-radius: 15px;
   background: #fff;
-  padding: 12px 24px;
+  height: 48px;
+  padding: 0 24px 0 25px;
   cursor: pointer;
 
   color: var(--gray-gray_818181, #818181);
@@ -11,13 +12,19 @@
 
   display: inline-flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 14px;
+}
+
+.button span {
+  line-height: 1;
 }
 
 /* Mobile */
 @media (max-width: 375px) {
   .button {
-    padding: 8px 10px;
+    height: 40px;
+    padding: 0 14px 0 10px;
+    gap: 14px;
   }
 }
