@@ -1,8 +1,10 @@
 /* 스터디 이름 + 페이지 이동 버튼 */
 .top {
   display: flex;
-  justify-content: space-between;
+
   align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
 .title {
@@ -10,30 +12,40 @@
   color: #414141;
   font-size: 32px;
   font-weight: 800;
+  flex: 1;
+  min-width: 0;
+  white-space: normal;
+  word-break: keep-all;
 }
 
 .navButtonWrapper {
   display: flex;
   gap: 16px;
+  margin-left: auto;
 }
 
 .currentTime {
   margin-top: 16px;
 }
 
-/* Mobile */
-@media (max-width: 375px) {
+/* 스터디 이름 + 페이지 이동 버튼 줄바꿈 */
+@media (max-width: 540px) {
   .top {
     flex-direction: column;
     align-items: flex-start;
     gap: 16px;
   }
-  
-  .title {
-    font-size: 24px;
-  }
 
   .navButtonWrapper {
     gap: 8px;
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+/* Mobile */
+@media (max-width: 375px) {
+  .title {
+    font-size: 24px;
   }
 }

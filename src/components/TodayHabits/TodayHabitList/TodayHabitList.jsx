@@ -14,47 +14,49 @@ export const TodayHabitList = ({ studyId, habits, onToggle, onSuccess }) => {
 
   return (
     <div className={styles.sectionCard}>
-      <div className={styles.sectionTop}>
-        <h2 className={styles.title}>오늘의 습관</h2>
-        <button
-          type="button"
-          className={styles.button}
-          onClick={handleOpenEditModal}
-        >
-          목록 수정
-        </button>
-      </div>
+      <div className={styles.sectionInner}>
+        <div className={styles.sectionTop}>
+          <h2 className={styles.title}>오늘의 습관</h2>
+          <button
+            type="button"
+            className={styles.button}
+            onClick={handleOpenEditModal}
+          >
+            목록 수정
+          </button>
+        </div>
 
-      {isEditOpen && (
-        <HabitEditModal
-          studyId={studyId}
-          initialHabits={habits}
-          onClose={() => setIsEditOpen(false)}
-          onSuccess={onSuccess}
-        />
-      )}
-
-      <section>
-        {habits.length === 0 ? (
-          <EmptyState />
-        ) : (
-          <ul>
-            {habits.map((habit) => (
-              <li key={habit.habitId}>
-                <button
-                  className={clsx(
-                    styles.habitItem,
-                    habit.checked && styles.checkedHabitItem,
-                  )}
-                  onClick={() => onToggle(habit.habitId, habit.checked)}
-                >
-                  {habit.title}
-                </button>
-              </li>
-            ))}
-          </ul>
+        {isEditOpen && (
+          <HabitEditModal
+            studyId={studyId}
+            initialHabits={habits}
+            onClose={() => setIsEditOpen(false)}
+            onSuccess={onSuccess}
+          />
         )}
-      </section>
+
+        <section>
+          {habits.length === 0 ? (
+            <EmptyState />
+          ) : (
+            <ul>
+              {habits.map((habit) => (
+                <li key={habit.habitId}>
+                  <button
+                    className={clsx(
+                      styles.habitItem,
+                      habit.checked && styles.checkedHabitItem,
+                    )}
+                    onClick={() => onToggle(habit.habitId, habit.checked)}
+                  >
+                    {habit.title}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
+      </div>
     </div>
   );
 };
