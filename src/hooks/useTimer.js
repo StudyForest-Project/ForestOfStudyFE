@@ -10,6 +10,7 @@ export const useTimer = (studyId) => {
   const timerRef = useRef(null);
 
   // 타이머
+  // setInterval로만 하니까 백그라운드 탭으로 가면 정확도 떨어짐
   useEffect(() => {
     if (!isActive || isPaused) {
       clearInterval(timerRef.current);
@@ -17,7 +18,7 @@ export const useTimer = (studyId) => {
     }
 
     timerRef.current = setInterval(() => {
-      setActiveTime((prev) => prev + 1); // 진행 시간 = 누적 시간 + 흐른 시간
+      setActiveTime((prev) => prev + 1);
     }, 1000);
 
     return () => clearInterval(timerRef.current);

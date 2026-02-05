@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { formatToTwoDigits } from '@/utils/timerUtils';
 import { LuAlarmClock } from 'react-icons/lu';
 import styles from './TimerDisplay.module.css';
+import clsx from 'clsx';
 
 export default function TimerDisplay({
   isInputMode,
@@ -45,20 +46,14 @@ export default function TimerDisplay({
     targetRef.current?.focus();
   }, [isInputMode, hourInputRef, minuteInputRef]);
 
-  // 타이머 색상
-  const getColorClass = () => {
-    if (!isActive) return '';
+  // 타이머 색상 상태
+  const isMinus = isActive && timeSign === '-';
 
-    if (timeSign === '-') {
-      return styles.minus;
-    }
-
-    if (formattedTime.hours === '00' && formattedTime.minutes === '00') {
-      return styles.warning;
-    }
-
-    return '';
-  };
+  const isWarning =
+    isActive &&
+    !isMinus &&
+    formattedTime.hours === '00' &&
+    formattedTime.minutes === '00';
 
   return (
     <div className={styles.timerDisplay}>
@@ -68,11 +63,15 @@ export default function TimerDisplay({
       </div>
 
       <div
-        className={`${styles.timerContainer} ${getColorClass()}`}
+        className={clsx(styles.timerContainer, {
+          [styles.minus]: isMinus,
+          [styles.warning]: isWarning,
+        })}
         ref={inputContainerRef}
       >
         {isInputMode ? (
           <div className={styles.displayTime}>
+            <span className={styles.signPlaceholder}></span>
             <input
               className={styles.timerInput}
               type="number"

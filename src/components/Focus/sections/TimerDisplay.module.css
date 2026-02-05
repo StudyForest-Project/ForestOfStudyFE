@@ -6,6 +6,7 @@
 }
 
 .timeBadge {
+  margin-top: 24px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,10 +15,9 @@
   height: 30px;
   border-radius: 50px;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  background-color: white;
   font-size: 16px;
   font-weight: 500;
-  color: var(--gray-01);
+  color: var(var(--gray-01));
 }
 
 .timerContainer {
@@ -37,20 +37,22 @@
   color: var(--gray-01);
 }
 
-.sign {
+.sign,
+.signPlaceholder {
   font-size: 80px;
   font-weight: 700;
   margin-right: 15px;
   color: inherit;
   transform: translateY(-15px);
   display: inline-block;
+  width: 1ch;
 }
 
 .timeUnit {
   cursor: pointer;
   padding: 0 2px;
   transition: color 0.2s;
-  /* 숫자 폭 고정 */
+
   font-variant-numeric: tabular-nums;
 }
 
@@ -69,7 +71,7 @@
   margin-left: 8px;
   display: inline-block;
   font-variant-numeric: tabular-nums;
-  width: 1.5ch;
+  width: 2ch;
 }
 
 .timerInput {
@@ -81,6 +83,7 @@
   color: var(--gray-01);
   text-align: center;
   width: 2ch;
+  box-sizing: border-box;
   outline: none;
   padding: 0 4px;
   margin: 0;
@@ -107,4 +110,36 @@
 .minus .displayTime,
 .minus .displayTime * {
   color: var(--gray-02);
+}
+
+@media (max-width: 744px) {
+  .displayTime {
+    font-size: 100px;
+  }
+
+  .sign {
+    font-size: 60px;
+    margin-right: 12px;
+  }
+
+  .seconds,
+  .fixedSeconds {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 375px) {
+  .displayTime {
+    font-size: 70px;
+  }
+
+  .sign {
+    font-size: 40px;
+    margin-right: 10px;
+  }
+
+  .seconds,
+  .fixedSeconds {
+    font-size: 30px;
+  }
 }

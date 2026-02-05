@@ -115,7 +115,7 @@ export default function Timer() {
 
   return (
     <div className={styles.focusContainer}>
-      <h3 className={styles.subTitle}>오늘의 집중</h3>
+      <h3 className={styles.title}>오늘의 집중</h3>
 
       <TimerDisplay
         isInputMode={isInputMode}

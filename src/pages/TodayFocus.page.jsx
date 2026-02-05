@@ -4,7 +4,7 @@ import { useFetchData } from '@/hooks/useFetchData';
 import styles from './TodayFocus.module.css';
 import { PointBadge } from '@/components/PointBadge';
 import { NavButton } from '@/components';
-import { updateRecentTime } from '@/utils/timerUtils';
+import { updateTimeList } from '@/utils/timerUtils';
 
 export const TodayFocusPage = () => {
   const { studyId } = useParams();
@@ -24,7 +24,7 @@ export const TodayFocusPage = () => {
   const updatedTimeList = (minutes, label) => {
     setData((prev) => ({
       ...prev,
-      timeList: updateRecentTime(prev.timeList, minutes, label), // 유틸 사용
+      timeList: updateTimeList(prev.timeList, minutes, label),
     }));
   };
 
@@ -45,7 +45,7 @@ export const TodayFocusPage = () => {
 
         <div className={styles.nav}>
           <NavButton to="../habit">오늘의 습관</NavButton>
-          <NavButton to="..">홈</NavButton>
+          <NavButton to="..">스터디 상세</NavButton>
         </div>
       </div>
 

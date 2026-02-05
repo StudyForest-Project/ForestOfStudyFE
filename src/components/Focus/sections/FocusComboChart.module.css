@@ -1,6 +1,26 @@
+.chartContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.chartHeader {
+  width: 100%;
+  padding-left: 10%;
+  box-sizing: border-box;
+  margin-bottom: 12px;
+}
+
+.chartTitle {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--gray-01);
+}
+
 .focusChartSVG {
   display: block;
-  width: 80%;
+  width: 85%;
   height: auto;
   margin: 0 auto;
 }
@@ -60,7 +80,7 @@
 }
 
 .focusDotToday {
-  fill: var(--green-02);
+  fill: var(--green-03);
   stroke: #ffffff;
   stroke-width: 2;
 }
@@ -69,4 +89,60 @@
   font-size: 11px;
   font-weight: bold;
   fill: var(--gray-01);
+}
+
+.legendContainer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 12px;
+  padding-right: 10%;
+}
+
+.legendContent {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legendBar {
+  width: 20px;
+  height: 20px;
+  background-color: #99c08e;
+  opacity: 0.6;
+  display: inline-block;
+  border-radius: 2px;
+}
+
+.legendLine {
+  width: 25px;
+  height: 5px;
+  background-color: var(--green-01);
+  display: inline-block;
+  border-radius: 5px;
+}
+
+.legendLabel {
+  font-size: 14px;
+  color: var(--gray-02);
+}
+
+@media (max-width: 744px) {
+  .chartTitle {
+    font-size: 16px;
+  }
+
+  .legendLabel {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 375px) {
+  .chartTitle {
+    font-size: 12px;
+  }
+
+  .legendLabel {
+    font-size: 10px;
+  }
 }

@@ -32,7 +32,7 @@
 
 .rateDisplay {
   border-top: 1px solid var(--gray-03);
-  padding: 90px 20px;
+  padding: 90px 0 90px;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -56,8 +56,7 @@
 
 .focusChart {
   border-top: 1px solid var(--gray-03);
-  padding-top: 90px;
-  padding-bottom: 40px;
+  padding: 90px 0 40px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -70,5 +69,29 @@
   margin-left: 120px;
 }
 
+@media (max-width: 744px) {}
+
+
 @media (max-width: 375px) {
+  .title {
+    font-size: 24px;
+  }
+
+  .summary {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .rateDisplay {
+    padding: 40px 0 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+  
+  .focusChart {
+    padding: 40px 0 20px;
+  }
 }

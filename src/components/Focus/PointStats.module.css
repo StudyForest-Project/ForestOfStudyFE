@@ -32,16 +32,25 @@
 
 .pointChart {
   border-top: 1px solid var(--gray-03);
-  padding-top: 80px;
-  padding-bottom: 40px;
+  padding: 80px 0 40px;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  align-items: flex-start;
 }
 
-.chartTitle {
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--gray-01);
-  margin-left: 190px;
+@media (max-width: 375px) {
+  .title {
+    font-size: 24px;
+  }
+
+  .summary {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .pointChart {
+    padding: 40px 0 20px;
+  }
 }
