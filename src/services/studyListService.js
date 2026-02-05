@@ -17,3 +17,8 @@ export const getStudiesList = async (
   });
   return res.data;
 };
+
+export const getRecentList = async (data) => {
+  const res = await publicApi.post('/studies/recent', data);
+  return res.data;
+};
