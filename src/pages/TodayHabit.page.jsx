@@ -26,6 +26,12 @@ export const TodayHabitPage = () => {
     }
   };
 
+  const fetchHabits = async () => {
+    const { habits } = await getTodayHabits(studyId);
+
+    setHabits(habits);
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       const { studyTitle, now, habits } = await getTodayHabits(studyId);
@@ -44,6 +50,7 @@ export const TodayHabitPage = () => {
         studyId={studyId}
         habits={habits}
         onToggle={handleToggleHabit}
+        onSuccess={fetchHabits}
       />
     </div>
   );

@@ -1,15 +1,16 @@
 import { useState } from 'react';
+import { createHabit, deleteHabit, updateHabit } from '@/services';
+import { PrimaryButton } from '@/components/PrimaryButton';
+import { showSuccessToast, showWarningToast } from '@/utils/toast';
 import deleteIcon from '@/assets/icons/ic_delete.svg';
 import plusIcon from '@/assets/icons/ic_plus_black.svg';
-import { createHabit, deleteHabit, updateHabit } from '@/services';
-import { showSuccessToast, showWarningToast } from '@/utils/toast';
 import styles from './HabitEditModal.module.css';
-import { PrimaryButton } from '@/components/PrimaryButton';
 
 export const HabitEditModal = ({
   studyId,
   initialHabits = [],
   onClose,
+  onSuccess,
 }) => {
   const [habits, setHabits] = useState(
     initialHabits.map((habit) => ({
@@ -79,6 +80,7 @@ export const HabitEditModal = ({
       ]);
 
       showSuccessToast('습관이 수정되었습니다.');
+      onSuccess();
       onClose();
     } catch {
       showWarningToast('습관 수정에 실패했습니다.');
@@ -122,7 +124,9 @@ export const HabitEditModal = ({
           <PrimaryButton className={styles.cancelButton} onClick={onClose}>
             취소
           </PrimaryButton>
-          <PrimaryButton onClick={handleSubmit}>수정 완료</PrimaryButton>
+          <PrimaryButton className={styles.submitButton} onClick={handleSubmit}>
+            수정 완료
+          </PrimaryButton>
         </div>
       </div>
     </div>
