@@ -25,7 +25,11 @@ export const NavButton = ({
   return (
     <Link to={to} className={`${styles.button} ${className}`}>
       <span>{children}</span>
-      <img src={ic_arrow} alt="" aria-hidden="true" />
+      <img
+        src={ic_arrow}
+        alt=""
+        aria-hidden="true"
+      />
     </Link>
   );
 };

@@ -20,3 +20,9 @@
   border-radius: 20px;
   background: #ffffff;
 }
+
+@media (max-width: 375px) {
+  .container {
+    padding: 16px;
+  }
+}
