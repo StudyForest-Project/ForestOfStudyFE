@@ -130,11 +130,15 @@
 
 @media (max-width: 375px) {
   .displayTime {
-    font-size: 70px;
+    font-size: 60px;
   }
 
+  .timerContainer {
+  margin: 30px 0;
+}
+
   .sign {
-    font-size: 40px;
+    font-size: 30px;
     margin-right: 10px;
   }
 
@@ -142,4 +146,9 @@
   .fixedSeconds {
     font-size: 30px;
   }
+
+  .separator {
+  transform: translateY(-5px);
+  display: inline-block;
+}
 }

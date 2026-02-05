@@ -5,7 +5,8 @@
   align-items: center;
 }
 
-.timeList {
+.timeList,
+.timeListHidden {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,7 +14,6 @@
   height: 30px;
   margin-bottom: 20px;
 
-  opacity: 1;
   visibility: visible;
   transition: opacity 0.2s ease;
 }
@@ -123,4 +123,42 @@
 .startButton:focus,
 .stopButton:focus {
   outline: none;
+}
+
+@media (max-width: 375px) {
+  .timeList {
+    margin-bottom: 12px;
+  }
+
+  .timeListHidden {
+    margin-bottom: 12px;
+  }
+
+  .timeSelectButton {
+    width: 75px;
+    height: 30px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .timerButtons {
+    gap: 8px;
+  }
+  .startButton,
+  .stopButton {
+    width: 140px;
+    height: 40px;
+    font-size: 20px;
+  }
+
+  .iconOnlyButton {
+    width: 40px;
+    height: 40px;
+    font-size: 28px;
+  }
+
+  .placeholder {
+    width: 40px;
+    height: 40px;
+  }
 }

@@ -142,7 +142,7 @@
     font-size: 12px;
   }
 
-  .legendLabel {
-    font-size: 10px;
+  .legendContainer {
+    display: none;
   }
 }

@@ -16,3 +16,9 @@
   line-height: 100%;
   color: var(--gray-01);
 }
+
+@media (max-width: 375px) {
+  .focusContainer {
+    padding: 64px 0 40px;
+  }
+}
