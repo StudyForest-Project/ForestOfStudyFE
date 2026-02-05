@@ -17,7 +17,7 @@ export const ActionMenu = ({ studyId, study }) => {
   const handleActionClick = async (type) => {
     /* 공유하기는 비밀번호 검증 없이 바로 실행 */
     if (type === 'share') {
-      const result = await shareStudy(study.title);
+      const result = await shareStudy();
 
       if (result.type === 'share') {
         showSuccessToast('공유가 완료되었습니다.');
@@ -50,6 +50,7 @@ export const ActionMenu = ({ studyId, study }) => {
 
     if (currentAction === 'delete') {
       await deleteStudy(studyId); // 스터디 삭제 API 호출
+      navigate('/'); // 홈으로 이동
     }
 
     setCurrentAction(null);
