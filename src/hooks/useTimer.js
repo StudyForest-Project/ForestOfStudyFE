@@ -1,5 +1,7 @@
-import { createFocusSession } from '@/services/focusService';
+import { createFocusSession, getFocusInfo } from '@/services/focusService';
 import { useEffect, useRef, useState } from 'react';
+
+const KEEP_ALIVE_INTERVAL = 10 * 60 * 1000; // 10분
 
 export const useTimer = (studyId) => {
   const [targetTime, setTargetTime] = useState(0);
@@ -8,6 +10,7 @@ export const useTimer = (studyId) => {
   const [isPaused, setIsPaused] = useState(false); // 타이머 일시정지
   const isPauseUsedRef = useRef(false); // 일시정시 사용 여부
   const timerRef = useRef(null);
+  const keepAliveRef = useRef(null);
 
   // 타이머
   // setInterval로만 하니까 백그라운드 탭으로 가면 정확도 떨어짐
@@ -23,6 +26,20 @@ export const useTimer = (studyId) => {
 
     return () => clearInterval(timerRef.current);
   }, [isActive, isPaused]);
+
+  // Keep-alive: 서버 콜드 스타트 방지 (10분마다 ping)
+  useEffect(() => {
+    if (!isActive) {
+      clearInterval(keepAliveRef.current);
+      return;
+    }
+
+    keepAliveRef.current = setInterval(() => {
+      getFocusInfo(studyId).catch(() => {});
+    }, KEEP_ALIVE_INTERVAL);
+
+    return () => clearInterval(keepAliveRef.current);
+  }, [isActive, studyId]);
 
   // 백엔드 전달 데이터
   const saveFocusSession = async () => {
