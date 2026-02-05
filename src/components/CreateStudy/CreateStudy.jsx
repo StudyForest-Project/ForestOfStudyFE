@@ -11,6 +11,7 @@ import visibility_on from '@/assets/icons/ic_visibility_on.svg';
 import { createStudy, patchStudy } from '@/services';
 import { useLocation, useNavigate, useParams } from 'react-router';
 import useCrateStudyStore from '@/stores/useStudyFormStore';
+import { useAuthStore } from '@/stores/authStore';
 
 const backgrounds = [
   { type: 'color', value: '#E1EDDE' },
@@ -22,7 +23,7 @@ const backgrounds = [
   { type: 'image', value: bgImg3 },
   { type: 'image', value: bgImg4 },
 ];
-
+const LAST_EDIT_KEY = 'studyForm:lastEditKey';
 export const CreateStudy = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordVerify, setShowPasswordVerify] = useState(false);
@@ -33,6 +34,7 @@ export const CreateStudy = () => {
   const setField = useCrateStudyStore((s) => s.setField);
   const setFormData = useCrateStudyStore((s) => s.setFormData);
   const resetFormData = useCrateStudyStore((s) => s.resetFormData);
+  const verifiedStudyId = useAuthStore((s) => s.verifiedStudyId);
   const nav = useNavigate();
 
   const handleChange = (e) => {
@@ -41,17 +43,34 @@ export const CreateStudy = () => {
   };
 
   const isModify = pathname.split('/')[2] === 'studyModify';
+
   useEffect(() => {
-    if (!isModify || !studyId) return;
-    const save = sessionStorage.getItem(`studyForm:${studyId}`);
+    //만들기 모드: 이전 수정 임시저장 정리 + zustand 초기화
+    if (!isModify) {
+      const lastKey = sessionStorage.getItem(LAST_EDIT_KEY);
+      if (lastKey) {
+        sessionStorage.removeItem(lastKey);
+        sessionStorage.removeItem(LAST_EDIT_KEY);
+      }
+      resetFormData();
+      return;
+    }
+
+    //수정 모드: lastEditKey 기록 + sessionStorage 로드
+    if (!studyId) return;
+
+    const key = `studyForm:${studyId}`;
+    sessionStorage.setItem(LAST_EDIT_KEY, key);
+
+    const save = sessionStorage.getItem(key);
     if (!save) return;
 
     try {
       setFormData(JSON.parse(save));
     } catch {
-      sessionStorage.removeItem(`studyForm:${studyId}`);
+      sessionStorage.removeItem(key);
     }
-  }, [isModify, studyId, setFormData]);
+  }, [isModify, studyId, setFormData, resetFormData, nav, verifiedStudyId]);
 
   const selectedBgIndex = useMemo(() => {
     const bgValue = formData.backgroundImage;
@@ -107,6 +126,8 @@ export const CreateStudy = () => {
       const response = await patchStudy(studyId, studyData);
       const item = response.study;
       resetFormData();
+      sessionStorage.removeItem(`studyForm:${studyId}`);
+      sessionStorage.removeItem(LAST_EDIT_KEY);
       nav(`/studies/${item.id}`);
     } catch (error) {
       console.error(error);
