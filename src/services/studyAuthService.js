@@ -14,4 +14,10 @@ const checkAccess = async (studyId) => {
   return res.data.ok;
 };
 
-export { verifyPassword, checkAccess };
+// DELETE /studies/:studyId/logout
+const logout = async (studyId) => {
+  const res = await api.delete(`/studies/${studyId}/logout`);
+  return res.data;
+};
+
+export { verifyPassword, checkAccess, logout };

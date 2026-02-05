@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import styles from './CreateStudy.module.css';
 import { PrimaryButton } from '../PrimaryButton';
 import bgImg1 from '@/assets/img/bg_img_1.jpg';
@@ -8,7 +8,7 @@ import bgImg4 from '@/assets/img/bg_img_4.jpg';
 import selectIcon from '@/assets/icons/ic_bg_selected.svg';
 import visibility_off from '@/assets/icons/ic_visibility_off.svg';
 import visibility_on from '@/assets/icons/ic_visibility_on.svg';
-import { createStudy, patchStudy } from '@/services';
+import { createStudy, patchStudy, logout, checkAccess } from '@/services';
 import { useLocation, useNavigate, useParams } from 'react-router';
 import useCrateStudyStore from '@/stores/useStudyFormStore';
 
@@ -35,6 +35,7 @@ export const CreateStudy = () => {
   const resetFormData = useCrateStudyStore((s) => s.resetFormData);
 
   const nav = useNavigate();
+  const isMountedRef = useRef(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -42,6 +43,50 @@ export const CreateStudy = () => {
   };
 
   const isModify = pathname.split('/')[2] === 'studyModify';
+
+  // 수정 모드에서 쿠키 없으면 홈으로 리다이렉트
+  useEffect(() => {
+    if (!isModify || !studyId) return;
+
+    const verifyAccess = async () => {
+      try {
+        const hasAccess = await checkAccess(studyId);
+        if (!hasAccess) {
+          nav('/', { replace: true });
+        }
+      } catch {
+        nav('/', { replace: true });
+      }
+    };
+
+    verifyAccess();
+  }, [isModify, studyId, nav]);
+
+  // 수정 모드에서 브라우저 뒤로가기/앞으로가기 막기
+  useEffect(() => {
+    if (!isModify) return;
+
+    const handlePopState = () => {
+      window.history.pushState(null, '', window.location.href);
+    };
+
+    window.history.pushState(null, '', window.location.href);
+    window.addEventListener('popstate', handlePopState);
+
+    isMountedRef.current = true;
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+      isMountedRef.current = false;
+      // Strict Mode에서 재마운트 여부 확인 후 logout
+      setTimeout(() => {
+        if (!isMountedRef.current) {
+          logout(studyId);
+        }
+      }, 100);
+      logout(studyId);
+    };
+  }, [isModify, studyId]);
 
   useEffect(() => {
     //만들기 모드: 이전 수정 임시저장 정리 + zustand 초기화
